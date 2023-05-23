@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
+<body>
+	<div class="content-body">
+		<div class="warper container-fluid">
+			<div class="all-patients main_container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header fix-card">
+								<div class="row">
+									<div class="col-8">
+										<h4 class="card-title">Danh sách</h4>
+									</div>
+									<div class="col-4 float-end">
+										<button type="button" data-bs-toggle="modal"
+											data-bs-target="#addModal" class="btn btn-primary float-end">Thêm
+											mới</button>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="example2" class="display nowrap">
+										<thead>
+											<tr>
+												<th></th>
+												<th>First Name</th>
+												<th>Last name</th>
+												<th>Email</th>
+												<th>Mobile No.</th>
+												<th>Birthday</th>
+												<th>Marital status</th>
+												<th>Sex</th>
+												<th>Blood Group</th>
+												<th>Patient Weight</th>
+												<th>Patient Height</th>
+												<th>Address</th>
+												<th>Patient History</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user1.jpg" alt=""></td>
+												<td>Airi</td>
+												<td>Satou</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user2.jpg" alt=""></td>
+												<td>Angelica</td>
+												<td>Ramos</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user3.jpg" alt=""></td>
+												<td>Ashton</td>
+												<td>Cox</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user4.jpg" alt=""></td>
+												<td>Bradley</td>
+												<td>Greer</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user5.jpg" alt=""></td>
+												<td>Brenden</td>
+												<td>Wagner</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user6.jpg" alt=""></td>
+												<td>Brielle</td>
+												<td>Williamson</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user7.jpg" alt=""></td>
+												<td>Bruno</td>
+												<td>Nash</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user8.jpg" alt=""></td>
+												<td>Caesar</td>
+												<td>Vance</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user9.jpg" alt=""></td>
+												<td>Cara</td>
+												<td>Stevens</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user10.jpg" alt=""></td>
+												<td>Cedric</td>
+												<td>Kelly</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user11.jpg" alt=""></td>
+												<td>Charde</td>
+												<td>Marshall</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user12.jpg" alt=""></td>
+												<td>Colleen</td>
+												<td>Hurst</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td>41</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+											<tr>
+												<td><img class="rounded-circle" width="35"
+													src="assets/images/patients/user12.jpg" alt=""></td>
+												<td>Daidai</td>
+												<td>Rios</td>
+												<td>test@gmail.com</td>
+												<td>658543469</td>
+												<td>2011/04/25</td>
+												<td>Maried</td>
+												<td>Male</td>
+												<td>A +</td>
+												<td>61</td>
+												<td class="text-end">41</td>
+												<td class="text-end">lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
+												<td><a class='mr-4 vue'> <span class='fa fa-eye'
+														aria-hidden='true'></span>
+												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
+													class='mr-4'> <span class='fas fa-pencil-alt'></span>
+												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+												</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ADD MODAL -->
+	<div class="modal fade" id="addModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Thêm mới danh
+						mục cha</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group">
+							<label class="form-label">Tên danh mục cha</label> <input
+								class="form-control" type="text" id="name"
+								placeholder="Tên danh mục cha"> <span
+								class="text-danger" id="name_error"></span>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Trạng thái</label>
+							<div class="form-check">
+								<input type="radio" class="form-check-input" value="true"
+									name="isActive" checked>Tồn tại <label
+									class="form-check-label"></label>
+							</div>
+							<div class="form-check">
+								<input type="radio" class="form-check-input" value="false"
+									name="isActive">Không tồn tại <label
+									class="form-check-label"></label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Hủy</button>
+					<button type="button" class="btn btn-primary">Thêm</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

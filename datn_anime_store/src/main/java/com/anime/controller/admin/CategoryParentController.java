@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AdminHomeController {
-	@GetMapping("/admin/index")
-	public String doShowIndex() {
-		return "admin/index";
+public class CategoryParentController {
+	@GetMapping("/admin/category-parent")
+	public String doShowView() {
+		return "admin/category-parent";
 	}
 }
