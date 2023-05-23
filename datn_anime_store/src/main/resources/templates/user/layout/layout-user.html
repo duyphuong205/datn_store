@@ -1,0 +1,106 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="dynamic(view)">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Anime || Store</title>
+<meta name="robots" content="noindex, follow" />
+<meta name="description" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="https://www.favicon.cc/logo3d/862154.png">
+
+<!-- CSS
+	============================================ -->
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	th:href="@{/user/assets/css/vendor/bootstrap.min.css}">
+<!-- Fontawesome -->
+<link rel="stylesheet"
+	th:href="@{/user/assets/css/vendor/font-awesome.min.css}">
+<!-- Fontawesome Star -->
+<link rel="stylesheet"
+	th:href="@{/user/assets/css/vendor/fontawesome-stars.min.css}">
+<!-- Ion Icon -->
+<link rel="stylesheet"
+	th:href="@{/user/assets/css/vendor/ion-fonts.css}">
+<!-- Slick CSS -->
+<link rel="stylesheet" th:href="@{/user/assets/css/plugins/slick.css}">
+<!-- Animation -->
+<link rel="stylesheet" th:href="@{/user/assets/css/plugins/animate.css}">
+<!-- jQuery Ui -->
+<link rel="stylesheet"
+	th:href="@{/user/assets/css/plugins/jquery-ui.min.css}">
+<!-- Nice Select -->
+<link rel="stylesheet"
+	th:href="@{/user/assets/css/plugins/nice-select.css}">
+<!-- Timecircles -->
+<link rel="stylesheet"
+	th:href="@{/user/assets/css/plugins/timecircles.css}">
+
+<link rel="stylesheet" th:href="@{/user/assets/css/style.css}">
+
+</head>
+
+<body class="template-color-1">
+
+	<div class="main-wrapper">
+
+		<!-- Menu -->
+		<th:block th:include="/user/layout/menu.html"></th:block>
+
+		<!-- Header -->
+		<th:block th:include="/user/layout/header.html"></th:block>
+
+		<!-- Body -->
+		<div th:replace="${view}"></div>
+
+		<!-- Footer -->
+		<th:block th:include="/user/layout/footer.html"></th:block>
+	</div>
+
+	<!-- JS
+============================================ -->
+
+	<!-- jQuery JS -->
+	<script th:src="@{/user/assets/js/vendor/jquery-1.12.4.min.js}"></script>
+	<!-- Modernizer JS -->
+	<script th:src="@{/user/assets/js/vendor/modernizr-2.8.3.min.js}"></script>
+	<!-- Popper JS -->
+	<script th:src="@{/user/assets/js/vendor/popper.min.js}"></script>
+	<!-- Bootstrap JS -->
+	<script th:src="@{/user/assets/js/vendor/bootstrap.min.js}"></script>
+
+	<!-- Slick Slider JS -->
+	<script th:src="@{/user/assets/js/plugins/slick.min.js}"></script>
+	<!-- Barrating JS -->
+	<script th:src="@{/user/assets/js/plugins/jquery.barrating.min.js}"></script>
+	<!-- Counterup JS -->
+	<script th:src="@{/user/assets/js/plugins/jquery.counterup.js}"></script>
+	<!-- Nice Select JS -->
+	<script th:src="@{/user/assets/js/plugins/jquery.nice-select.js}"></script>
+	<!-- Sticky Sidebar JS -->
+	<script th:src="@{/user/assets/js/plugins/jquery.sticky-sidebar.js}"></script>
+	<!-- Jquery-ui JS -->
+	<script th:src="@{/user/assets/js/plugins/jquery-ui.min.js}"></script>
+	<script
+		th:src="@{/user/assets/js/plugins/jquery.ui.touch-punch.min.js}"></script>
+	<!-- Theia Sticky Sidebar JS -->
+	<script th:src="@{/user/assets/js/plugins/theia-sticky-sidebar.min.js}"></script>
+	<!-- Waypoints JS -->
+	<script th:src="@{/user/assets/js/plugins/waypoints.min.js}"></script>
+	<!-- jQuery Zoom JS -->
+	<script th:src="@{/user/assets/js/plugins/jquery.zoom.min.js}"></script>
+	<!-- Timecircles JS -->
+	<script th:src="@{/user/assets/js/plugins/timecircles.js}"></script>
+	<!-- Main JS -->
+	<script th:src="@{/user/assets/js/main.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!-- Begin Main Header Area -->
+<header class="main-header_area">
+	<div class="transparent-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="transparent-header_nav position-relative">
+						<div class="header-logo_area">
+							<a href="index.html"> <img
+								src="https://www.favicon.cc/logo3d/862154.png" alt="Header Logo"
+								height="50px" width="50px">
+							</a>
+						</div>
+						<div class="main-menu_area d-none d-lg-block">
+							<nav class="main-nav d-flex justify-content-center">
+								<ul>
+									<li class="dropdown-holder"><a th:href="@{/index}"
+										class="text-white" style="font-weight: bold">Trang chủ </a></li>
+									<li class="megamenu-holder position-static"><a
+										th:href="@{/shop}" class="text-white"
+										style="font-weight: bold">Mua sắm <i
+											class="ion-chevron-down"></i></a>
+										<ul class="kenne-megamenu">
+											<li><span class="megamenu-title">Shop Page Layout</span>
+												<ul>
+													<li><a href="shop-fullwidth.html">Grid Fullwidth</a></li>
+												</ul></li>
+										</ul></li>
+									<li><a href="contact-us.html" class="text-white"
+										style="font-weight: bold">Giảm giá</a></li>
+									<li><a href="about-us.html" class="text-white"
+										style="font-weight: bold">Liên hệ</a></li>
+									<li><a href="javascript:void(0)" class="text-white"
+										style="font-weight: bold">Tài khoản <i
+											class="ion-chevron-down"></i></a>
+										<ul class="kenne-dropdown">
+											<li><a th:href="@{/login}">Đăng nhập</a></li>
+											<li><a th:href="@{/register}">Đăng ký</a></li>
+											<li><a href="faq.html">Quên mật khẩu</a></li>
+											<li><a href="faq.html">Lịch sử mua hàng</a></li>
+										</ul></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="header-right_area header-right_area-2">
+							<ul>
+								<li class="minicart-wrap"><a href="#miniCart"
+									class="minicart-btn toolbar-btn">
+										<div class="minicart-count_area">
+											<span class="item-count">03</span> <i class="ion-bag"></i>
+										</div>
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="header-sticky">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="sticky-header_nav position-relative">
+						<div class="row align-items-center justify-content-between">
+							<div class="col-lg-2 col-sm-6">
+								<div class="header-logo_area">
+									<a href="index.html"> <img
+										src="https://www.favicon.cc/logo3d/862154.png"
+										alt="Header Logo" height="50px" width="50px">
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-7 d-none d-lg-block position-static">
+								<div class="main-menu_area">
+									<nav class="main-nav d-flex justify-content-center">
+										<ul>
+											<li class="dropdown-holder"><a th:href="@{/index}">Trang
+													chủ </a></li>
+											<li class="megamenu-holder position-static"><a
+												th:href="@{/shop}">Mua sắm <i
+													class="ion-chevron-down"></i></a>
+												<ul class="kenne-megamenu">
+													<li><span class="megamenu-title">Shop Page
+															Layout</span>
+														<ul>
+															<li><a href="shop-fullwidth.html">Grid Fullwidth</a></li>
+														</ul></li>
+												</ul></li>
+											<li><a href="contact-us.html">Giảm giá</a></li>
+											<li><a href="about-us.html">Liên hệ</a></li>
+											<li><a href="javascript:void(0)">Tài khoản <i
+													class="ion-chevron-down"></i></a>
+												<ul class="kenne-dropdown">
+													<li><a th:href="@{/login}">Đăng nhập</a></li>
+											<li><a th:href="@{/register}">Đăng ký</a></li>
+													<li><a href="faq.html">Quên mật khẩu</a></li>
+													<li><a href="faq.html">Lịch sử mua hàng</a></li>
+												</ul></li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+							<div class="col-lg-3 col-sm-6">
+								<div class="header-right_area header-right_area-2">
+									<ul>
+										<li class="minicart-wrap"><a href="#miniCart"
+											class="minicart-btn toolbar-btn">
+												<div class="minicart-count_area">
+													<span class="item-count">03</span> <i class="ion-bag"></i>
+												</div>
+										</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="offcanvas-minicart_wrapper" id="miniCart">
+		<div class="offcanvas-menu-inner">
+			<a href="#" class="btn-close"><i class="ion-android-close"></i></a>
+			<div class="minicart-content">
+				<div class="minicart-heading">
+					<h4>Shopping Cart</h4>
+				</div>
+				<ul class="minicart-list">
+					<li class="minicart-product"><a class="product-item_remove"
+						href="javascript:void(0)"><i class="ion-android-close"></i></a>
+						<div class="product-item_img">
+							<img src="assets/images/product/1-1.jpg"
+								alt="Kenne's Product Image">
+						</div>
+						<div class="product-item_content">
+							<a class="product-item_title" href="shop-left-sidebar.html">Autem
+								ipsa ad</a> <span class="product-item_quantity">1 x $145.80</span>
+						</div></li>
+					<li class="minicart-product"><a class="product-item_remove"
+						href="javascript:void(0)"><i class="ion-android-close"></i></a>
+						<div class="product-item_img">
+							<img src="assets/images/product/2-1.jpg"
+								alt="Kenne's Product Image">
+						</div>
+						<div class="product-item_content">
+							<a class="product-item_title" href="shop-left-sidebar.html">Tenetur
+								illum amet</a> <span class="product-item_quantity">1 x
+								$150.80</span>
+						</div></li>
+					<li class="minicart-product"><a class="product-item_remove"
+						href="javascript:void(0)"><i class="ion-android-close"></i></a>
+						<div class="product-item_img">
+							<img src="assets/images/product/3-1.jpg"
+								alt="Kenne's Product Image">
+						</div>
+						<div class="product-item_content">
+							<a class="product-item_title" href="shop-left-sidebar.html">Non
+								doloremque placeat</a> <span class="product-item_quantity">1
+								x $165.80</span>
+						</div></li>
+				</ul>
+			</div>
+			<div class="minicart-item_total">
+				<span>Subtotal</span> <span class="ammount">$462.4‬0</span>
+			</div>
+			<div class="minicart-btn_area">
+				<a href="cart.html" class="kenne-btn kenne-btn_fullwidth">Minicart</a>
+			</div>
+			<div class="minicart-btn_area">
+				<a href="checkout.html" class="kenne-btn kenne-btn_fullwidth">Checkout</a>
+			</div>
+		</div>
+	</div>
+	<div class="global-overlay"></div>
+</header>
+<!-- Main Header Area End Here -->

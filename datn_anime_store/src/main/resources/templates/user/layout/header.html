@@ -1,0 +1,52 @@
+<div class="slider-area">
+	<div class="kenne-element-carousel home-slider arrow-style"
+		data-slick-options='{
+                "slidesToShow": 1,
+                "slidesToScroll": 1,
+                "infinite": true,
+                "arrows": true,
+                "dots": false,
+                "autoplay" : true,
+                "fade" : true,
+                "autoplaySpeed" : 7000,
+                "pauseOnHover" : false,
+                "pauseOnFocus" : false
+                }'
+		data-slick-responsive='[
+                {"breakpoint":768, "settings": {
+                "slidesToShow": 1
+                }},
+                {"breakpoint":575, "settings": {
+                "slidesToShow": 1
+                }}
+            ]'>
+		<div class="slide-item bg-1 animation-style-01"
+			style="background-image: url('https://i.pinimg.com/originals/01/e9/79/01e979e7ea349aa25f784e56b36a62eb.gif'); min-height: 500px;">
+			<div class="slider-progress"></div>
+			<div class="container">
+				<div class="slide-content">
+					<h2 class="text-info" style="font-weight: bold">
+						Mặt hàng Anime <br /> Khám phá xu hướng
+					</h2>
+					<div class="slide-btn">
+						<a class="kenne-btn" th:href="@{/anime-shop/shop}">Mua Ngay</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slide-item bg-2 animation-style-01"
+			style="background-image: url('https://i.pinimg.com/originals/35/a0/08/35a00855387ee7de3d4fb178e352eaca.gif'); min-height: 500px;">
+			<div class="slider-progress"></div>
+			<div class="container">
+				<div class="slide-content">
+					<h2 class="text-info" style="font-weight: bold">
+						Mặt hàng Anime <br /> Khám phá xu hướng
+					</h2>
+					<div class="slide-btn">
+						<a class="kenne-btn" th:href="@{/anime-shop/shop}">Mua Ngay</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
