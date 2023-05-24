@@ -21,9 +21,11 @@
 										style="font-weight: bold">Mua sắm <i
 											class="ion-chevron-down"></i></a>
 										<ul class="kenne-megamenu">
-											<li><span class="megamenu-title">Shop Page Layout</span>
+											<li th:each="itemParent: ${@DataGlobal.categoryParents}"><span
+												class="megamenu-title" th:text="${itemParent.name}"></span>
 												<ul>
-													<li><a href="shop-fullwidth.html">Grid Fullwidth</a></li>
+													<li th:each="item: ${itemParent.categories}"><a
+														href="shop-fullwidth.html" th:text="${item.name}"></a></li>
 												</ul></li>
 										</ul></li>
 									<li><a href="contact-us.html" class="text-white"
@@ -34,10 +36,16 @@
 										style="font-weight: bold">Tài khoản <i
 											class="ion-chevron-down"></i></a>
 										<ul class="kenne-dropdown">
-											<li><a th:href="@{/login}">Đăng nhập</a></li>
-											<li><a th:href="@{/register}">Đăng ký</a></li>
-											<li><a href="faq.html">Quên mật khẩu</a></li>
-											<li><a href="faq.html">Lịch sử mua hàng</a></li>
+											<li><a th:unless="${#request.remoteUser}"
+												th:href="@{/login}">Đăng nhập</a></li>
+											<li><a th:unless="${#request.remoteUser}"
+												th:href="@{/register}">Đăng ký</a></li>
+											<li><a th:unless="${#request.remoteUser}"
+												href="faq.html">Quên mật khẩu</a></li>
+											<li><a th:if="${#request.remoteUser}" href="faq.html">Lịch
+													sử mua hàng</a></li>
+											<li><a th:if="${#request.remoteUser}"
+												th:href="@{/logout}">Đăng xuất</a></li>
 										</ul></li>
 								</ul>
 							</nav>
@@ -78,13 +86,13 @@
 											<li class="dropdown-holder"><a th:href="@{/index}">Trang
 													chủ </a></li>
 											<li class="megamenu-holder position-static"><a
-												th:href="@{/shop}">Mua sắm <i
-													class="ion-chevron-down"></i></a>
+												th:href="@{/shop}">Mua sắm <i class="ion-chevron-down"></i></a>
 												<ul class="kenne-megamenu">
-													<li><span class="megamenu-title">Shop Page
-															Layout</span>
+													<li th:each="itemParent: ${@DataGlobal.categoryParents}"><span
+														class="megamenu-title" th:text="${itemParent.name}"></span>
 														<ul>
-															<li><a href="shop-fullwidth.html">Grid Fullwidth</a></li>
+															<li th:each="item: ${itemParent.categories}"><a
+																href="shop-fullwidth.html" th:text="${item.name}"></a></li>
 														</ul></li>
 												</ul></li>
 											<li><a href="contact-us.html">Giảm giá</a></li>
@@ -92,10 +100,16 @@
 											<li><a href="javascript:void(0)">Tài khoản <i
 													class="ion-chevron-down"></i></a>
 												<ul class="kenne-dropdown">
-													<li><a th:href="@{/login}">Đăng nhập</a></li>
-											<li><a th:href="@{/register}">Đăng ký</a></li>
-													<li><a href="faq.html">Quên mật khẩu</a></li>
-													<li><a href="faq.html">Lịch sử mua hàng</a></li>
+													<li><a th:unless="${#request.remoteUser}"
+														th:href="@{/login}">Đăng nhập</a></li>
+													<li><a th:unless="${#request.remoteUser}"
+														th:href="@{/register}">Đăng ký</a></li>
+													<li><a th:unless="${#request.remoteUser}"
+														href="faq.html">Quên mật khẩu</a></li>
+													<li><a th:if="${#request.remoteUser}" href="faq.html">Lịch
+															sử mua hàng</a></li>
+													<li><a th:if="${#request.remoteUser}"
+														th:href="@{/logout}">Đăng xuất</a></li>
 												</ul></li>
 										</ul>
 									</nav>

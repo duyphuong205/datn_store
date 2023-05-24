@@ -21,21 +21,8 @@
                 }}
             ]'>
 		<div class="slide-item bg-1 animation-style-01"
-			style="background-image: url('https://i.pinimg.com/originals/01/e9/79/01e979e7ea349aa25f784e56b36a62eb.gif'); min-height: 500px;">
-			<div class="slider-progress"></div>
-			<div class="container">
-				<div class="slide-content">
-					<h2 class="text-info" style="font-weight: bold">
-						Mặt hàng Anime <br /> Khám phá xu hướng
-					</h2>
-					<div class="slide-btn">
-						<a class="kenne-btn" th:href="@{/anime-shop/shop}">Mua Ngay</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="slide-item bg-2 animation-style-01"
-			style="background-image: url('https://i.pinimg.com/originals/35/a0/08/35a00855387ee7de3d4fb178e352eaca.gif'); min-height: 500px;">
+			th:each="item : ${@DataGlobal.posters}"
+			th:style="'background-image: url(' + @{${item.imageUrl}} + '); min-height: 500px;'">
 			<div class="slider-progress"></div>
 			<div class="container">
 				<div class="slide-content">

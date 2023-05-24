@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import com.anime.entity.base.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,9 +35,17 @@ public class User extends BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Tên người dùng không được để trống!")
 	private String username;
+	
+	@NotBlank(message = "Mật khẩu không được để trống!")
 	private String password;
+	
+	@NotBlank(message = "Họ tên người dùng không được để trống!")
 	private String fullname;
+	
+	@NotBlank(message = "Email không được để trống!")
+	@Email(message = "Email không đúng định dạng!")
 	private String email;
 	private String avatarUrl;
 
