@@ -2,62 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
 <body>
-	<!-- start section content -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 	<div class="content-body">
 		<div class="warper container-fluid">
+			<div class="row page-titles mx-0">
+				<div class="col-lg-12 p-md-0">
+					<h4 class="text-primary">
+						Chào [[${sayHello}]] <span class="names">[[${@AuthGlobal.inforUser.fullname}]]</span>
+					</h4>
+					<p class="mb-0 text-danger">Những thông tin đã được cập nhật
+						mới nhất cho cửa hàng Anime</p>
+				</div>
+			</div>
 			<div class="new-patients main_container">
 				<div class="row">
-					<div class="col-sm-6 col-xl-3 col-lg-6">
+					<div class="col-sm-6 col-xl-3 col-lg-6" style="width: 350px;">
 						<div class="widget card card-primary">
 							<div class="card-body">
 								<div class="media text-center">
-									<span> <i class="fas fa-calendar-check fa-2x"></i>
+									<span> <i style="font-size: 25px;"
+										class="fas fa-calculator"></i>
 									</span>
 									<div class="media-body">
-										<span class="text-white">Earnings</span>
-										<h3 class="mb-0 text-white">7699</h3>
+										<span class="text-white">Sản phẩm bán được</span>
+										<h3 class="mb-0 text-white">[[${totalQuantityProd}]]</h3>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-xl-3 col-lg-6">
+					<div class="col-sm-6 col-xl-3 col-lg-6" style="width: 350px;">
 						<div class="widget card card-danger">
 							<div class="card-body">
 								<div class="media text-center">
-									<span> <i class="fas fa-user-nurse fa-2x"></i>
+									<span> <i style="font-size: 25px;" class="fas fa-users"></i>
 									</span>
 									<div class="media-body">
-										<span class="text-white">Patients</span>
-										<h3 class="mb-0 text-white">400</h3>
+										<span class="text-white">Khách hàng mua</span>
+										<h3 class="mb-0 text-white">[[${totalUser}]]</h3>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-xl-3 col-lg-6">
-						<div class="widget card card-primary">
-							<div class="card-body">
-								<div class="media text-center">
-									<span> <i class="fas fa-user-plus fa-2x"></i>
-									</span>
-									<div class="media-body">
-										<span class="text-white">Appointments</span>
-										<h3 class="mb-0 text-white">1360</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6 col-xl-3 col-lg-6">
-						<div class="widget card card-primary">
+					<div class="col-sm-6 col-xl-3 col-lg-6" style="width: 350px;">
+						<div class="widget card card-success">
 							<div class="card-body">
 								<div class="media text-center">
 									<span> <i class="fas fa-database fa-2x"></i>
 									</span>
 									<div class="media-body">
-										<span class="text-white">Total Revenue</span>
-										<h3 class="mb-0 text-white">$6500</h3>
+										<span class="text-white">Tổng thu nhập</span>
+										<h3 class="mb-0 text-white">[[${#numbers.formatDecimal(totalPrice,
+											1, 'POINT', 3, 'POINT') + ' VNĐ'}]]</h3>
 									</div>
 								</div>
 							</div>
@@ -65,194 +62,91 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-8">
-						<div class="card shadow widget1">
-							<div class="card-header">
-								<h4 class="card-title">Activity</h4>
-								<span class="subtitle">TODAY 24, JAN 2019</span>
-							</div>
-							<div class="card-body">
-								<canvas id="chart1" width="100%" height="40"></canvas>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="card shadow widget-2">
-							<div class="card-header">
-								<h4 class="card-title">New Patient</h4>
-							</div>
-							<div class="card-body">
-								<div class="panel-body widget-media main-scroll nicescroll-box">
-									<ul class="list-group list-unstyled">
-										<li
-											class="list-group-item d-flex justify-content-between align-items-center media">
-											<div class="d-flex">
-												<div class="img-patient">
-													<img src="assets/images/patients/user1.jpg"
-														class="rounded-circle" alt="people">
-												</div>
-												<div class="media-body">
-													<h4 class="mb-0">Airi Satou</h4>
-													<span>Maried, Rabat</span>
-												</div>
-											</div>
-											<button type="button" class="ms-btn-icon btn-success"
-												name="button">
-												<i class="fas fa-arrow-right"></i>
-											</button>
-										</li>
-										<li
-											class="list-group-item d-flex justify-content-between align-items-center media">
-											<div class="d-flex">
-												<div class="img-patient">
-													<img src="assets/images/patients/user2.jpg"
-														class="rounded-circle" alt="people">
-												</div>
-												<div class="media-body">
-													<h4 class="mb-0">Airi Satou</h4>
-													<span>Maried, Rabat</span>
-												</div>
-											</div>
-											<button type="button" class="ms-btn-icon btn-success"
-												name="button">
-												<i class="fas fa-arrow-right"></i>
-											</button>
-										</li>
-										<li
-											class="list-group-item d-flex justify-content-between align-items-center media">
-											<div class="d-flex">
-												<div class="img-patient">
-													<img src="assets/images/patients/user3.jpg"
-														class="rounded-circle" alt="people">
-												</div>
-												<div class="media-body">
-													<h4 class="mb-0">Airi Satou</h4>
-													<span>Maried, Rabat</span>
-												</div>
-											</div>
-											<button type="button" class="ms-btn-icon btn-success"
-												name="button">
-												<i class="fas fa-arrow-right"></i>
-											</button>
-										</li>
-										<li
-											class="list-group-item d-flex justify-content-between align-items-center media">
-											<div class="d-flex">
-												<div class="img-patient">
-													<img src="assets/images/patients/user4.jpg"
-														class="rounded-circle" alt="people">
-												</div>
-												<div class="media-body">
-													<h4 class="mb-0">Airi Satou</h4>
-													<span>Maried, Rabat</span>
-												</div>
-											</div>
-											<button type="button" class="ms-btn-icon btn-success"
-												name="button">
-												<i class="fas fa-arrow-right"></i>
-											</button>
-										</li>
-										<li
-											class="list-group-item d-flex justify-content-between align-items-center media">
-											<div class="d-flex">
-												<div class="img-patient">
-													<img src="assets/images/patients/user5.jpg"
-														class="rounded-circle" alt="people">
-												</div>
-												<div class="media-body">
-													<h4 class="mb-0">Airi Satou</h4>
-													<span>Maried, Rabat</span>
-												</div>
-											</div>
-											<button type="button" class="btn-success" name="button">
-												<i class="fas fa-arrow-right"></i>
-											</button>
-										</li>
-										<li
-											class="list-group-item d-flex justify-content-between align-items-center media">
-											<div class="d-flex">
-												<div class="img-patient">
-													<img src="assets/images/patients/user5.jpg"
-														class="rounded-circle" alt="people">
-												</div>
-												<div class="media-body">
-													<h4 class="mb-0">Airi Satou</h4>
-													<span>Maried, Rabat</span>
-												</div>
-											</div>
-											<button type="button" class="btn-success" name="button">
-												<i class="fas fa-arrow-right"></i>
-											</button>
-										</li>
-										<li
-											class="list-group-item d-flex justify-content-between align-items-center media">
-											<div class="d-flex">
-												<div class="img-patient">
-													<img src="assets/images/patients/user5.jpg"
-														class="rounded-circle" alt="people">
-												</div>
-												<div class="media-body">
-													<h4 class="mb-0">Airi Satou</h4>
-													<span>Maried, Rabat</span>
-												</div>
-											</div>
-											<button type="button" class="btn-success" name="button">
-												<i class="fas fa-arrow-right"></i>
-											</button>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="card shadow widget1">
-							<div class="card-header">
-								<h4 class="card-title">Top Diseases</h4>
-							</div>
-							<div class="card-body">
-								<div class="row justify-content-center">
-									<div class="col-lg-12">
-										<canvas id="chart3" width="100%" height="220"></canvas>
-									</div>
-									<div class="col-lg-10">
-										<ul class="d-flex justify-content-between m-t-30">
-											<li class="content-widget text-center">
-												<p class="mb-0 fs-14 text-muted">Stroke</p>
-												<h4 class="mb-0 fs-20 text-dark-gray">8952</h4>
-											</li>
-											<li class="content-widget text-center">
-												<p class="mb-0 fs-14 text-muted">Diabetes</p>
-												<h4 class="mb-0 fs-20 text-dark-gray">7458</h4>
-											</li>
-											<li class="content-widget text-center">
-												<p class="mb-0 fs-14 text-muted">Cirrhosis</p>
-												<h4 class="mb-0 fs-20 text-dark-gray">3254</h4>
-											</li>
-											<li class="content-widget text-center">
-												<p class="mb-0 fs-14 text-muted">Tuberculosis</p>
-												<h4 class="mb-0 fs-20 text-dark-gray">3254</h4>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="card shadow widget1">
-							<div class="card-header">
-								<h4 class="card-title">Total Patient Per Day</h4>
-							</div>
-							<div class="card-body">
-								<canvas id="chart2" width="100%" height="299"></canvas>
-							</div>
-						</div>
-					</div>
-				</div>
+                <div class="col-lg-12">
+                    <div class="card shadow widget1">
+                        <div class="card-header">
+                            <h4 class="card-title">Doanh thu hàng tháng qua của từng năm</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-3">
+                                <h5 class="card-title">Chọn năm</h5>
+                                <form class="ml-4" th:action="@{/admin/index}" method="GET">
+                                    <div class="form-group ">
+                                        <select name="year" class="form-control font-weight-bold"
+                                                onchange="this.form.submit()">
+                                            <option th:each="item: ${years}" th:text="${item}"
+                                                    th:value="${item}" th:selected="${item} == ${currentYear}"></option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-12" style="height: 500px">
+                                <canvas class="chart" id="statisChart"
+                                        style="min-height: 250px; height: 500px; max-height: 500px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 			</div>
 		</div>
 	</div>
-	<!-- End section content -->
+	
+	<script th:inline="javascript">
+    /*<![CDATA][*/
+    var totalPriceLast12Months = /*[[${statisticalByYear}]]*/'default';
+    var year = /*[[${currentYear}]]*/'default';
+    /*]]>*/
+
+    const ctx = document.getElementById('statisChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type : 'bar',
+        data : {
+            labels : totalPriceLast12Months[0],
+            datasets : [ {
+                label : 'Doanh thu của năm ' + year,
+                data : totalPriceLast12Months[1],
+                backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)' ],
+                borderColor : [ 'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)', 'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)' ],
+                borderWidth : 5
+            } ]
+        },
+        options : {
+            responsive : true,
+            maintainAspectRatio : false,
+            scales : {
+                yAxes : [ {
+                    ticks : {
+                        beginAtZero : false,
+                        callback : function(value, index, values) {
+                            return value.toLocaleString("vi-VN", {
+                                style : "currency",
+                                currency : "VND"
+                            });
+                        }
+                    }
+                } ]
+            }
+        }
+    });
+</script>
+	
 </body>
 </html>
