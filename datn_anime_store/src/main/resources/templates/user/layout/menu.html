@@ -25,10 +25,11 @@
 												class="megamenu-title" th:text="${itemParent.name}"></span>
 												<ul>
 													<li th:each="item: ${itemParent.categories}"><a
-														href="shop-fullwidth.html" th:text="${item.name}"></a></li>
+														th:href="@{|/shop/category/${item.name}|}"
+														th:text="${item.name}"></a></li>
 												</ul></li>
 										</ul></li>
-									<li><a href="contact-us.html" class="text-white"
+									<li><a th:href="@{/shop-discount}" class="text-white"
 										style="font-weight: bold">Giảm giá</a></li>
 									<li><a href="about-us.html" class="text-white"
 										style="font-weight: bold">Liên hệ</a></li>
@@ -41,9 +42,9 @@
 											<li><a th:unless="${#request.remoteUser}"
 												th:href="@{/register}">Đăng ký</a></li>
 											<li><a th:unless="${#request.remoteUser}"
-												href="faq.html">Quên mật khẩu</a></li>
-											<li><a th:if="${#request.remoteUser}" href="faq.html">Lịch
-													sử mua hàng</a></li>
+												th:href="@{/forgot-password}">Quên mật khẩu</a></li>
+											<li><a th:if="${#request.remoteUser}"
+												th:href="@{/my-order}">Lịch sử mua hàng</a></li>
 											<li><a th:if="${#request.remoteUser}"
 												th:href="@{/logout}">Đăng xuất</a></li>
 										</ul></li>
@@ -55,7 +56,9 @@
 								<li class="minicart-wrap"><a href="#miniCart"
 									class="minicart-btn toolbar-btn">
 										<div class="minicart-count_area">
-											<span class="item-count">03</span> <i class="ion-bag"></i>
+											<span class="item-count" id="headerTotalQuantity1"
+												th:text="${session.currentCart.totalQuantity}"></span> <i
+												class="ion-bag"></i>
 										</div>
 								</a></li>
 							</ul>
@@ -95,7 +98,7 @@
 																href="shop-fullwidth.html" th:text="${item.name}"></a></li>
 														</ul></li>
 												</ul></li>
-											<li><a href="contact-us.html">Giảm giá</a></li>
+											<li><a th:href="@{/shop-discount}">Giảm giá</a></li>
 											<li><a href="about-us.html">Liên hệ</a></li>
 											<li><a href="javascript:void(0)">Tài khoản <i
 													class="ion-chevron-down"></i></a>
@@ -105,9 +108,9 @@
 													<li><a th:unless="${#request.remoteUser}"
 														th:href="@{/register}">Đăng ký</a></li>
 													<li><a th:unless="${#request.remoteUser}"
-														href="faq.html">Quên mật khẩu</a></li>
-													<li><a th:if="${#request.remoteUser}" href="faq.html">Lịch
-															sử mua hàng</a></li>
+														th:href="@{/forgot-password}">Quên mật khẩu</a></li>
+													<li><a th:if="${#request.remoteUser}"
+														th:href="@{/my-order}">Lịch sử mua hàng</a></li>
 													<li><a th:if="${#request.remoteUser}"
 														th:href="@{/logout}">Đăng xuất</a></li>
 												</ul></li>
@@ -121,7 +124,9 @@
 										<li class="minicart-wrap"><a href="#miniCart"
 											class="minicart-btn toolbar-btn">
 												<div class="minicart-count_area">
-													<span class="item-count">03</span> <i class="ion-bag"></i>
+													<span class="item-count" id="headerTotalQuantity2"
+														th:text="${session.currentCart.totalQuantity}"></span> <i
+														class="ion-bag"></i>
 												</div>
 										</a></li>
 									</ul>
@@ -138,52 +143,25 @@
 			<a href="#" class="btn-close"><i class="ion-android-close"></i></a>
 			<div class="minicart-content">
 				<div class="minicart-heading">
-					<h4>Shopping Cart</h4>
+
+					<h4>Giá hàng</h4>
+
 				</div>
-				<ul class="minicart-list">
-					<li class="minicart-product"><a class="product-item_remove"
-						href="javascript:void(0)"><i class="ion-android-close"></i></a>
-						<div class="product-item_img">
-							<img src="assets/images/product/1-1.jpg"
-								alt="Kenne's Product Image">
-						</div>
-						<div class="product-item_content">
-							<a class="product-item_title" href="shop-left-sidebar.html">Autem
-								ipsa ad</a> <span class="product-item_quantity">1 x $145.80</span>
-						</div></li>
-					<li class="minicart-product"><a class="product-item_remove"
-						href="javascript:void(0)"><i class="ion-android-close"></i></a>
-						<div class="product-item_img">
-							<img src="assets/images/product/2-1.jpg"
-								alt="Kenne's Product Image">
-						</div>
-						<div class="product-item_content">
-							<a class="product-item_title" href="shop-left-sidebar.html">Tenetur
-								illum amet</a> <span class="product-item_quantity">1 x
-								$150.80</span>
-						</div></li>
-					<li class="minicart-product"><a class="product-item_remove"
-						href="javascript:void(0)"><i class="ion-android-close"></i></a>
-						<div class="product-item_img">
-							<img src="assets/images/product/3-1.jpg"
-								alt="Kenne's Product Image">
-						</div>
-						<div class="product-item_content">
-							<a class="product-item_title" href="shop-left-sidebar.html">Non
-								doloremque placeat</a> <span class="product-item_quantity">1
-								x $165.80</span>
-						</div></li>
-				</ul>
 			</div>
 			<div class="minicart-item_total">
-				<span>Subtotal</span> <span class="ammount">$462.4‬0</span>
+
+				<span>Tổng giá:</span> <span class="ammount" id="headerTotalPrice"
+					th:text="${#numbers.formatDecimal(session.currentCart.totalPrice, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></span>
 			</div>
 			<div class="minicart-btn_area">
-				<a href="cart.html" class="kenne-btn kenne-btn_fullwidth">Minicart</a>
+				<a th:href="@{/cart-view}" class="kenne-btn kenne-btn_fullwidth">Giỏ
+					Hàng</a>
 			</div>
 			<div class="minicart-btn_area">
-				<a href="checkout.html" class="kenne-btn kenne-btn_fullwidth">Checkout</a>
+				<a th:href="@{/checkout}" class="kenne-btn kenne-btn_fullwidth">Thanh
+					Toán</a>
 			</div>
+
 		</div>
 	</div>
 	<div class="global-overlay"></div>

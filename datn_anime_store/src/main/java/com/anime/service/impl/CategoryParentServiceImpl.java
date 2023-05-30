@@ -1,5 +1,6 @@
 package com.anime.service.impl;
 
+import com.anime.constants.ActiveConstant;
 import com.anime.entity.CategoryParent;
 import com.anime.repo.CategoryParentRepo;
 import com.anime.service.CategoryParentService;
@@ -41,4 +42,9 @@ public class CategoryParentServiceImpl implements CategoryParentService {
     public void delete(Long id) {
         categoryParentRepo.deleteById(id);
     }
+
+	@Override
+	public List<CategoryParent> getByIsActice() {
+		return categoryParentRepo.findByIsActive(ActiveConstant.ENABLE);
+	}
 }

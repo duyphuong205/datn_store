@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/user/layout/layout-user.html :: dynamic(~{::body})}">
+<body>
+	<!-- Begin Kenne's Single Product Area -->
+	<div class="sp-area">
+		<div class="container">
+			<div class="sp-nav">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="sp-img_area">
+							<div
+								class="sp-img_slider slick-img-slider kenne-element-carousel"
+								data-slick-options='{
+                                "slidesToShow": 1,
+                                "arrows": false,
+                                "fade": true,
+                                "draggable": false,
+                                "swipe": false,
+                                "asNavFor": ".sp-img_slider-nav"
+                                }'>
+								<div class="single-slide red zoom" th:each="item: ${images}">
+									<img th:src="@{${item.imageUrl}}" width="100%" height="500px;"
+										alt="Kenne's Product Image">
+								</div>
+							</div>
+							<div
+								class="sp-img_slider-nav slick-slider-nav kenne-element-carousel arrow-style-2 arrow-style-3"
+								data-slick-options='{
+                                "slidesToShow": 3,
+                                "asNavFor": ".sp-img_slider",
+                                "focusOnSelect": true,
+                                "arrows" : true,
+                                "spaceBetween": 30
+                                }'
+								data-slick-responsive='[
+                                        {"breakpoint":1501, "settings": {"slidesToShow": 3}},
+                                        {"breakpoint":1200, "settings": {"slidesToShow": 2}},
+                                        {"breakpoint":992, "settings": {"slidesToShow": 4}},
+                                        {"breakpoint":768, "settings": {"slidesToShow": 3}},
+                                        {"breakpoint":575, "settings": {"slidesToShow": 2}}
+                                    ]'>
+								<div class="single-slide red" th:each="item: ${images}">
+									<img th:src="@{${item.imageUrl}}" height="130px"
+										alt="Kenne's Product Thumnail">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="sp-content">
+							<div class="sp-heading">
+								<h5 style="font-size: 30px;" th:text="${product.name}"></h5>
+							</div>
+							<span class="new-price font-weight-bold"
+								th:text="${#numbers.formatDecimal(product.price, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></span>
+							<div class="sp-essential_stuff mt-4">
+
+								<ul>
+									<li><b style="font-size: 20px;">Thông số sản phẩm</b></li>
+									<li>Ngày bán: [[${#dates.format(product.createDate, 'dd-MM-yyyy')}]]
+									<li>Thuộc loại sản phẩm: [[${product.category.name}]]</li>
+									<li>Đã bán: [[${product.selled}]] sản phẩm</li>
+									<li th:if="${product.description != null}">Mô tả:
+										[[${product.description}]]</li>
+								</ul>
+							</div>
+							<div class="quantity">
+								<label>Số lượng</label>
+								<div class="cart-plus-minus">
+									<input class="cart-plus-minus-box" value="1" type="text"
+										id="quantityCart">
+									<div class="dec qtybutton">
+										<i class="fa fa-angle-down"></i>
+									</div>
+									<div class="inc qtybutton">
+										<i class="fa fa-angle-up"></i>
+									</div>
+								</div>
+							</div>
+							<div class="qty-btn_area">
+								<ul>
+									<li th:if="${product.quantity > 0}"><a
+										style="cursor: pointer;" class="qty-cart_btn"
+										th:attr="onclick='addToCart(\'' + ${product.id} + '\')'">Thêm
+											giỏ hàng</a></li>
+									<li th:unless="${product.quantity > 0}"><a
+										class="qty-cart_btn"
+										style="pointer-events: none; cursor: default; opacity: 0.6;"
+										href="cart.html">Đã hết hàng</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Kenne's Single Product Area End Here -->
+
+	<!-- Begin Product Tab Area Two -->
+	<div class="product-tab_area-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="sp-product-tab_nav">
+						<div class="product-tab">
+							<ul class="nav product-menu">
+								<li><a class="active" data-toggle="tab" href="#reviews"><span>Đánh
+											giá([[${reviews.size}]])</span></a></li>
+							</ul>
+						</div>
+						<div class="tab-content uren-tab_content">
+							<div id="reviews" class="tab-pane active show" role="tabpanel">
+								<div class="form-horizontal" id="form-review">
+									<div id="review" th:if="${reviews.size > 0}">
+										<table class="table table-striped table-bordered" th:each="item: ${reviews}">
+											<tbody>
+												<tr>
+													<td style="width: 50%;"><strong>[[${item.user.username}]]</strong></td>
+													<td class="text-right" th:text="${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')}"></td>
+												</tr>
+												<tr>
+													<td colspan="2">
+														<p th:text="${item.comment}"></p>
+														<div class="rating-box">
+															<ul th:if="${item.rating == 1}">
+																<li><i class="ion-android-star"></i></li>
+															</ul>
+															<ul th:if="${item.rating == 2}">
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+															</ul>
+															<ul th:if="${item.rating == 3}">
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+															</ul>
+															<ul th:if="${item.rating == 4}">
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+															</ul>
+															<ul th:if="${item.rating == 5}">
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+																<li><i class="ion-android-star"></i></li>
+															</ul>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="row">
+										<div class="col-lg-12">
+											<div class="kenne-paginatoin-area">
+												<div class="row">
+													<div class="col-lg-12">
+														<ul class="kenne-pagination-box primary-color">
+															<li
+																th:style="${currentPage == 1} ? 'pointer-events: none; color: currentColor; cursor: not-allowed; opacity: 0.5; ' : ''">
+																<a
+																th:href="@{${currentPage > 1} ? ${'?page=' + (currentPage - 1)}}">Trước</a>
+															</li>
+															<li th:each="i: ${#numbers.sequence(1, totalPages)}"
+																th:class="${currentPage == i} ? 'active' : ''"><a
+																th:href="@{'?page=' + ${i}}" th:text="${i}"></a></li>
+															<li
+																th:style="${currentPage == totalPages} ? 'pointer-events: none; color: currentColor; cursor: not-allowed; opacity: 0.5; ' : ''">
+																<a class="Next"
+																th:href="@{${curretnPage < totalPages} ? ${'?page=' + (currentPage + 1)}}">Tiếp</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+									<h2>Viết đánh giá</h2>
+									<div class="form-group required second-child">
+										<div class="col-sm-12 p-0">
+											<label class="control-label">Góp ý của bạn</label>
+											<textarea class="review-textarea" name="con_message"
+												id="comment"></textarea>
+										</div>
+									</div>
+									<div class="form-group last-child required">
+										<div class="col-sm-12 p-0">
+											<div class="your-opinion">
+												<label>Số sao của bạn</label> <span> <select
+													class="star-rating" id="rating">
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+												</select>
+												</span>
+											</div>
+										</div>
+										<div class="kenne-btn-ps_right">
+											<button
+												th:attr="onclick='submitReview(\'' + ${product.id} + '\')'"
+												class="kenne-btn">Đánh giá</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Product Tab Area Two End Here -->
+
+	<!-- Begin Product Area -->
+	<div class="product-area pb-90">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title">
+						<h3>Sản phẩm cùng loại</h3>
+						<div class="product-arrow"></div>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="kenne-element-carousel product-slider slider-nav"
+						data-slick-options='{
+                        "slidesToShow": 4,
+                        "slidesToScroll": 1,
+                        "infinite": false,
+                        "arrows": true,
+                        "dots": false,
+                        "spaceBetween": 30,
+                        "appendArrows": ".product-arrow"
+                        }'
+						data-slick-responsive='[
+                        {"breakpoint":992, "settings": {
+                        "slidesToShow": 3
+                        }},
+                        {"breakpoint":768, "settings": {
+                        "slidesToShow": 2
+                        }},
+                        {"breakpoint":575, "settings": {
+                        "slidesToShow": 1
+                        }}
+                    ]'>
+
+						<div class="product-item"
+							th:each="item: ${product.category.products}">
+							<div class="single-product" style="height: 450px;">
+								<div class="product-img">
+									<a th:href="@{|/shop/${item.slug}|}"> <img
+										class="primary-img"
+										th:src="@{${item.getImagesProducts().get(0).getImageUrl()}}"
+										height="250px" alt="Kenne's Product Image"> <img
+										class="secondary-img"
+										th:src="@{${item.getImagesProducts().get(1).getImageUrl()}}"
+										height="250px" alt="Kenne's Product Image">
+									</a> <span class="sticker-2">Liên quan</span>
+									<div class="add-actions">
+										<ul>
+											<li class="quick-view-btn" data-toggle="modal"
+												data-target="#exampleModalCenter"><a
+												th:href="@{|/shop/${item.slug}|}" data-toggle="tooltip"
+												data-placement="right" title="Chi tiết"><i
+													class="ion-ios-eye"></i></a></li>
+											<li><a
+												th:attr="onclick='addToCart(\'' + ${item.id} + '\')'"
+												data-toggle="tooltip" data-placement="right"
+												title="Thêm vào giỏ"><i class="ion-bag"></i></a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="product-content">
+									<div class="product-desc_info">
+										<h3 class="product-name">
+											<a th:href="@{|/shop/${item.slug}|}" th:text="${item.name}"></a>
+										</h3>
+										<div class="price-box">
+											<span class="new-price"
+												th:text="${#numbers.formatDecimal(item.price, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const addToCart = (productId) =>{
+			var inputQuantity = '#quantityCart';
+			var quantity = $(inputQuantity).val();
+	   			const url = '/anime/api/cart/update?productId=' + productId + '&quantity=' + quantity + '&isReplace=false';
+				$.ajax({
+					url : url,
+					type : 'GET',
+					dataType : 'json',
+					success : function(data) {
+						$('#headerTotalPrice').text(formatCurrency(data.totalPrice));
+						$('#headerTotalQuantity1').text(data.totalQuantity);
+						$('#headerTotalQuantity2').text(data.totalQuantity);
+						if(quantity>1){
+							var inputQuantityRefresh = '#quantityCart';
+							$(inputQuantityRefresh).val(1);
+						}
+					},
+					error : function(error) {
+						console.log(error);
+						alert("Thêm giỏ hàng thất bại!");
+					}
+				});
+	   		}
+	   		
+	   	const formatCurrency = (x) => {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' VNĐ';
+			}
+	   	
+	   	const submitReview = (productId) => {
+	   		var rating = $('#rating').val();
+			var comment = $('#comment').val();
+			if(rating == 0){
+				Swal.fire("Thông báo", "Bạn chưa chọn đánh giá sao!", "error");
+				return;
+			}
+			if(comment.trim() == '' || comment  == null){
+				Swal.fire("Thông báo", "Bạn chưa nhập góp ý!", "error");
+				return;
+			}
+			
+			var url = '/anime/api/review/submit?productId=' + productId + '&rating=' + rating + '&comment=' + comment;
+			$.ajax({
+				url: url,
+				type: 'GET',
+				statusCode: {
+					200: handle200,
+					401: handle401
+				}
+			});
+	   	}
+	   	
+	   	function handle200(){
+			Swal.fire("Hoàn thành", "Đánh giá thành công!", "success");
+			setTimeout(function() {
+				  location.reload();
+				}, 3000);
+		}
+	   	
+	   	function handle401(){
+			Swal.fire("Thông báo", "Vui lòng đăng nhập trước khi thanh toán!", "error");
+			window.location.href = '/anime/login'
+		}
+	</script>
+
+</body>
+</html>

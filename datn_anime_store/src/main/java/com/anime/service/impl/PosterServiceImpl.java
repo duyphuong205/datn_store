@@ -1,5 +1,6 @@
 package com.anime.service.impl;
 
+import com.anime.constants.ActiveConstant;
 import com.anime.entity.Poster;
 import com.anime.repo.PosterRepo;
 import com.anime.service.PosterService;
@@ -41,4 +42,9 @@ public class PosterServiceImpl implements PosterService {
     public void delete(Long id) {
         posterRepo.deleteById(id);
     }
+
+	@Override
+	public List<Poster> getByIsActive() {
+		return posterRepo.findByIsActive(ActiveConstant.ENABLE);
+	}
 }

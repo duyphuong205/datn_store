@@ -9,4 +9,6 @@ public interface UserService extends BaseService<User> {
 	User getByUsername(String username);
 
 	User getByEmail(String username);
+	
+	void updatePassword(String password, Long id);
 }

@@ -41,8 +41,8 @@ public class SecurityConfig {
 		http.cors().disable();
 		
 		http.authorizeHttpRequests()
-			.antMatchers("/checkout", "/my-order").authenticated()
-			.antMatchers("/anime/admin/index").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/checkout").authenticated()
+			.antMatchers("/admin/index").hasAnyRole("ADMIN", "STAFF")
 			.anyRequest()
 			.permitAll();
 		

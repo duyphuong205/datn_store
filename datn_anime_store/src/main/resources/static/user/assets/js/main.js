@@ -706,17 +706,23 @@
 -------------------------------- */
 	var sliderrange = $('#slider-range');
 	var amountprice = $('#amount');
+	var min = $('#minamount');
+	var max = $('#maxamount');
 	$(function () {
 		sliderrange.slider({
 			range: true,
-			min: 20,
-			max: 100,
-			values: [0, 100],
+			min: 50.000,
+			max: 900.000,
+			values: [0, 900000],
 			slide: function (event, ui) {
-				amountprice.val('$' + ui.values[0] + ' - $' + ui.values[1]);
+				amountprice.val( ui.values[0] + '.000' + ' - ' + ui.values[1] + '.000' +' VNĐ');
+				min.val( ui.values[ 0 ] );
+          		max.val( ui.values[ 1 ]);
 			}
 		});
-		amountprice.val('$' + sliderrange.slider('values', 0) + ' - $' + sliderrange.slider('values', 1));
+		amountprice.val(sliderrange.slider('values', 0) + '.000' + ' - ' + sliderrange.slider('values', 1) + '.000' + ' VNĐ');
+		min.val(sliderrange.slider( "values", 0 ) );
+      	max.val( sliderrange.slider( "values", 1 ) );
 	});
 
 	/*--------------------------------

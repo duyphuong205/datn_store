@@ -20,7 +20,7 @@ public class FileServiceImpl implements FileService {
 
 	private final AmazonS3Client amazonS3Client;
 
-	private final String BUCKET_NAME = "";
+	private final String BUCKET_NAME = "datn-anime-store";
 
 	@Override
 	public String uploadFile(MultipartFile file) {

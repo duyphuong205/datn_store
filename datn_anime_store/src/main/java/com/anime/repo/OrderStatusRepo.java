@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OrderStatusRepo extends JpaRepository<OrderStatus, Long> {
-
+	OrderStatus findByStatus(Integer status);
 }

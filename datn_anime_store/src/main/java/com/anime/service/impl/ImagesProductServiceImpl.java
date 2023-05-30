@@ -41,4 +41,9 @@ public class ImagesProductServiceImpl implements ImagesProductService {
     public void delete(Long id) {
         imagesProductRepo.deleteById(id);
     }
+
+	@Override
+	public List<ImagesProduct> getByProductId(Long id) {
+		return imagesProductRepo.findByProductId(id);
+	}
 }

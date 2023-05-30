@@ -41,4 +41,9 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     public void delete(Long id) {
         orderStatusRepo.deleteById(id);
     }
+    
+    @Override
+	public OrderStatus getByStatus(Integer status) {
+		return orderStatusRepo.findByStatus(status);
+	}
 }

@@ -20,11 +20,11 @@ public class DataGlobal {
 	private final CategoryParentService categoryParentService;
 
 	public List<CategoryParent> getCategoryParents() {
-		return !categoryParentService.getAll().isEmpty() ? categoryParentService.getAll() : null;
+		return !categoryParentService.getByIsActice().isEmpty() ? categoryParentService.getByIsActice() : null;
 	}
 
 	public List<Poster> getPosters() {
-		return !posterService.getAll().isEmpty() ? posterService.getAll() : null;
+		return !posterService.getByIsActive().isEmpty() ? posterService.getByIsActive() : null;
 	}
 
 }

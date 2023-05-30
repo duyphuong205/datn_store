@@ -81,4 +81,9 @@ public class UserServiceImpl implements UserService {
 	public User getByEmail(String username) {
 		return userRepo.findByEmailAndIsActive(username, ActiveConstant.ENABLE);
 	}
+
+	@Override
+	public void updatePassword(String password, Long id) {
+		userRepo.updatePassword(password, id);
+	}
 }

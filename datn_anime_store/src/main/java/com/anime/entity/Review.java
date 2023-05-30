@@ -31,10 +31,8 @@ public class Review extends BaseEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Float rating;
+	private Integer rating;
 	private String comment;
-	private Integer like;
-	private Integer dislike;
 
 	@ManyToOne
 	@JoinColumn(name = "userId", referencedColumnName = "id")

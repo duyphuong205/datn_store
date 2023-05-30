@@ -4,5 +4,5 @@ import com.anime.entity.OrderStatus;
 import com.anime.service.base.BaseService;
 
 public interface OrderStatusService extends BaseService<OrderStatus> {
-
+	OrderStatus getByStatus(Integer status);
 }
