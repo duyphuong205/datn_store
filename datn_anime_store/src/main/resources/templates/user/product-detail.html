@@ -117,7 +117,7 @@
 										<table class="table table-striped table-bordered" th:each="item: ${reviews}">
 											<tbody>
 												<tr>
-													<td style="width: 50%;"><strong>[[${item.user.username}]]</strong></td>
+													<td style="width: 50%;"><strong>[[${item.user.fullname}]]</strong></td>
 													<td class="text-right" th:text="${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')}"></td>
 												</tr>
 												<tr>

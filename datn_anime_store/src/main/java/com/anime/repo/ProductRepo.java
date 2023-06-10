@@ -43,4 +43,20 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 	
 	@Query(value = "SELECT * FROM Products where is_active = ? AND discount <> 0 ORDER BY discount DESC", nativeQuery = true)
 	Page<Product> findByDiscount(Boolean isAcitve, Pageable pageable) ;
+	
+	@Modifying(clearAutomatically = true)
+	@Query("UPDATE Product p SET p.isActive = ?1 WHERE p.id = ?2")
+	void deleteLogical(Boolean isActive, Long id);
+	
+	@Query("SELECT p FROM Product p WHERE p.isActive = ?1 order by p.price desc")
+	Page<Product> sortHightToLow(Boolean isAcitve, Pageable pageable) ;
+	
+	@Query("SELECT p FROM Product p WHERE p.isActive = ?1 order by p.price asc")
+	Page<Product> sortLowToHight(Boolean isAcitve, Pageable pageable) ;
+	
+	@Query("SELECT p FROM Product p WHERE p.isActive = ?1 order by p.view desc")
+	Page<Product> sortViewDesc(Boolean isAcitve, Pageable pageable) ;
+	
+	@Query("SELECT p FROM Product p WHERE p.isActive = ?1 order by p.selled desc")
+	Page<Product> sortSelledDesc(Boolean isAcitve, Pageable pageable) ;
 }

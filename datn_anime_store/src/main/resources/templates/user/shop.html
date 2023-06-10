@@ -84,14 +84,14 @@
 								<label class="select-label">Tiêu chí sắp xếp:</label> <select
 									class="nice-select myniceselect"
 									onchange="location = this.value;">
-									<option value="/anime-shop/shop">Mặc Định</option>
-									<option value="/anime-shop/shop/sortPriceDesc">Giá Cao
-										- Thấp</option>
-									<option value="/anime-shop/shop/sortPriceAsc">Giá Thấp
-										- Cao</option>
-									<option value="/anime-shop/shop/sortProductDiscount">Khuyến
-										Mãi Hot</option>
-									<option value="/anime-shop/shop/sortView">Xem Nhiều</option>
+									<option value="/anime/shop">Mặc Định</option>
+									<option value="/anime/shop/sortPriceDesc">Giá Cao -
+										Thấp</option>
+									<option value="/anime/shop/sortPriceAsc">Giá Thấp -
+										Cao</option>
+									<option value="/anime/shop/sortViewDesc">Được quan tâm
+										nhiều</option>
+									<option value="/anime/shop/sortSelledDesc">Bán chạy</option>
 								</select>
 
 							</div>
@@ -109,6 +109,7 @@
 									<div class="product-img">
 										<a th:href="@{|/shop/${item.slug}|}"> <img
 											class="primary-img"
+											th:if="${item.getImagesProducts().get(0).getImageUrl()} != null"
 											th:src="@{${item.getImagesProducts().get(0).getImageUrl()}}"
 											height="250px" alt="Kenne's Product Image" /> <img
 											class="secondary-img"
@@ -146,30 +147,22 @@
 								</div>
 							</div>
 							<div class="list-product_item">
-								<div class="single-product">
+								<div class="single-product pb-3">
 									<div class="product-img">
-										<a href=""> <img src="" alt="Kenne's Product Image" />
+										<a th:href="@{|/shop/${item.slug}|}"> <img
+											th:src="@{${item.getImagesProducts().get(0).getImageUrl()}}"
+											height="200px" width="300px" alt="Kenne's Product Image" />
 										</a>
 									</div>
 									<div class="product-content">
 										<div class="product-desc_info">
 											<div class="price-box">
-												<span class="new-price"></span>
+												<span class="new-price"
+													th:text="${#numbers.formatDecimal(item.price, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></span>
 											</div>
 											<h6 class="product-name">
-												<a href=""></a>
+												<a th:href="@{|/shop/${item.slug}|}" th:text="${item.name}"></a>
 											</h6>
-											<div class="rating-box">
-												<ul>
-													<li><i class="ion-ios-star"></i></li>
-													<li><i class="ion-ios-star"></i></li>
-													<li><i class="ion-ios-star"></i></li>
-													<li class="silver-color"><i class="ion-ios-star-half"></i>
-													</li>
-													<li class="silver-color"><i
-														class="ion-ios-star-outline"></i></li>
-												</ul>
-											</div>
 											<div class="product-short_desc">
 												<p></p>
 											</div>
@@ -177,10 +170,12 @@
 										<div class="add-actions">
 											<ul>
 												<li class="quick-view-btn" data-toggle="modal"
-													data-target="#exampleModalCenter"><a href=""
-													data-toggle="tooltip" data-placement="top" title="Chi tiết"><i
+													data-target="#exampleModalCenter"><a
+													th:href="@{|/shop/${item.slug}|}" data-toggle="tooltip"
+													data-placement="top" title="Chi tiết"><i
 														class="ion-ios-eye"></i></a></li>
 												<li><a data-toggle="tooltip" data-placement="top"
+													th:attr="onclick='addToCart(\'' + ${item.id} + '\')'"
 													title="Thêm vào giỏ"><i class="ion-bag"></i></a></li>
 											</ul>
 										</div>

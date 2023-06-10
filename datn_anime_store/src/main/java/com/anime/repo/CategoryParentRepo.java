@@ -17,7 +17,10 @@ public interface CategoryParentRepo extends JpaRepository<CategoryParent, Long> 
 
 	Page<CategoryParent> findByIsActive(Boolean isActive, Pageable pageable);
 
+	@Query("SELECT c FROM CategoryParent c WHERE c.isActive = ?1 AND CONCAT(c.name) LIKE %?2%")
+	Page<CategoryParent> findByKeyword(Boolean isActive, String keyword, Pageable pageable);
+
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE Category c SET c.isActive = ?1 WHERE c.id = ?2")
+	@Query("UPDATE CategoryParent c SET c.isActive = ?1 WHERE c.id = ?2")
 	void deleteLogical(Boolean isActive, Long id);
 }

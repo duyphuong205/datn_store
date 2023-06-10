@@ -37,13 +37,13 @@ public class User extends BaseEntity implements Serializable {
 
 	@NotBlank(message = "Tên người dùng không được để trống!")
 	private String username;
-	
+
 	@NotBlank(message = "Mật khẩu không được để trống!")
 	private String password;
-	
+
 	@NotBlank(message = "Họ tên người dùng không được để trống!")
 	private String fullname;
-	
+
 	@NotBlank(message = "Email không được để trống!")
 	@Email(message = "Email không đúng định dạng!")
 	private String email;

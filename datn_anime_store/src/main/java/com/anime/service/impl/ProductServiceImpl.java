@@ -1,5 +1,6 @@
 package com.anime.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,5 +100,30 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Page<Product> getByDiscount(Pageable pageable) {
 		return productRepo.findByDiscount(ActiveConstant.ENABLE, pageable);
+	}
+
+	@Override
+	public void deleteLogical(Long id) throws SQLException {
+		productRepo.deleteLogical(ActiveConstant.DISABLE, id);
+	}
+
+	@Override
+	public Page<Product> sortHightToLow(Pageable pageable) {
+		return productRepo.sortHightToLow(ActiveConstant.ENABLE, pageable);
+	}
+
+	@Override
+	public Page<Product> sortLowToHight(Pageable pageable) {
+		return productRepo.sortLowToHight(ActiveConstant.ENABLE, pageable);
+	}
+
+	@Override
+	public Page<Product> sortView(Pageable pageable) {
+		return productRepo.sortViewDesc(ActiveConstant.ENABLE, pageable);
+	}
+
+	@Override
+	public Page<Product> sortSelled(Pageable pageable) {
+		return productRepo.sortSelledDesc(ActiveConstant.ENABLE, pageable);
 	}
 }

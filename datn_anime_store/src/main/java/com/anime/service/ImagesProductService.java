@@ -7,4 +7,6 @@ import com.anime.service.base.BaseService;
 
 public interface ImagesProductService extends BaseService<ImagesProduct> {
 	List<ImagesProduct> getByProductId(Long id);
+
+	void saveImages(List<ImagesProduct> images);
 }

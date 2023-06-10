@@ -61,4 +61,9 @@ public class CategoryParentServiceImpl implements CategoryParentService {
 	public Page<CategoryParent> getByIsActice(Pageable pageable) {
 		return categoryParentRepo.findByIsActive(ActiveConstant.ENABLE, pageable);
 	}
+
+	@Override
+	public Page<CategoryParent> getByKeyword(String keyword, Pageable pageable) {
+		return categoryParentRepo.findByKeyword(ActiveConstant.ENABLE, keyword, pageable);
+	}
 }

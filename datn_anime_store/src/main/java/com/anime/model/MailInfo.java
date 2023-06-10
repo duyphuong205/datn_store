@@ -21,7 +21,7 @@ public class MailInfo implements Serializable {
 	private String body;
 
 	public MailInfo(String to, String subject, String body) {
-		this.from = "hfurnitureshop@gmail.com";
+		this.from = "animeshop2462@gmail.com";
 		this.to = to;
 		this.subject = subject;
 		this.body = body;

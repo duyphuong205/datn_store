@@ -37,4 +37,9 @@ public class ImagesProduct extends BaseEntity implements Serializable {
 	@JoinColumn(name = "productId", referencedColumnName = "id")
 	@JsonIgnoreProperties(value = { "applications", "hibernateLazyInitializer" })
 	private Product product;
+
+	public ImagesProduct(String imageUrl, Product product) {
+		this.imageUrl = imageUrl;
+		this.product = product;
+	}
 }

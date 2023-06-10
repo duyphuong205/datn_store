@@ -1,5 +1,6 @@
 package com.anime.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -30,4 +31,14 @@ public interface ProductService extends BaseService<Product> {
 	Page<Product> getByPrice(Double min, Double max, Pageable pageable);
 	
 	Page<Product> getByDiscount(Pageable pageable);
+	
+	void deleteLogical(Long id) throws SQLException;
+	
+	Page<Product> sortHightToLow(Pageable pageable);
+
+	Page<Product> sortLowToHight(Pageable pageable);
+
+	Page<Product> sortView(Pageable pageable);
+	
+	Page<Product> sortSelled(Pageable pageable);
 }

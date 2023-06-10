@@ -11,7 +11,7 @@
 							<div class="card-header fix-card">
 								<div class="row">
 									<div class="col-8">
-										<h4 class="card-title">Danh sách danh mục cha</h4>
+										<h4 class="card-title">Danh sách khách hàng</h4>
 									</div>
 									<div class="col-2 float-end">
 										<button type="button" data-bs-toggle="modal"
@@ -34,7 +34,10 @@
 										<thead class="text-center">
 											<tr class="bg-primary">
 												<th class="text-white">Mã</th>
-												<th class="text-white">Tên danh mục cha</th>
+												<th class="text-white">Ảnh</th>
+												<th class="text-white">Tên</th>
+												<th class="text-white">Họ tên</th>
+												<th class="text-white">Email</th>
 												<th class="text-white">Người tạo</th>
 												<th class="text-white">Người sửa</th>
 												<th class="text-white">Ngày tạo</th>
@@ -42,10 +45,14 @@
 												<th></th>
 											</tr>
 										</thead>
-										<tbody th:each="item: ${categoryParents}">
+										<tbody th:each="item: ${users}">
 											<tr>
 												<td th:text="${item.id}"></td>
-												<td th:text="${item.name}"></td>
+												<td><img alt="" class="rounded" height="40px;"
+													width="40px" th:src="@{${item.avatarUrl}}"></td>
+												<td th:text="${item.username}"></td>
+												<td th:text="${item.fullname}"></td>
+												<td th:text="${item.email}"></td>
 												<td
 													th:text="${item.createdBy} ? ${item.createdBy} : 'Trống'"></td>
 												<td
@@ -95,28 +102,102 @@
 	<!-- ADD MODAL -->
 	<div class="modal fade" id="addModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/add}" method="POST">
-			<div class="modal-dialog modal-lg">
+		<form th:action="@{/admin/customer/add}" method="POST"
+			enctype="multipart/form-data">
+			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Thêm mới danh
-							mục cha</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Thêm mới khách
+							hàng</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<div class="row">
-							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
-									class="form-control myInput" type="text" id="name" name="name"
-									placeholder="Tên danh mục cha">
+							<div class="form-group col-md-6">
+								<label class="form-label">Tên khách hàng</label> <input
+									class="form-control myInput" type="text" id="username"
+									name="username" placeholder="Tên khách hàng">
+							</div>
+							<div class="form-group col-md-6">
+								<label class="form-label">Họ tên khách hàng</label> <input
+									class="form-control myInput" type="text" id="fullname"
+									name="fullname" placeholder="Họ tên khách hàng">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label class="form-label">Mật khẩu</label> <input
+									class="form-control myInput" type="password" id="password"
+									name="password" placeholder="Mật khẩu khách hàng">
+							</div>
+							<div class="form-group col-md-6">
+								<label class="form-label">Email</label> <input
+									class="form-control myInput" type="email" id="email"
+									name="email" placeholder="Email khách hàng">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="form-label">Ảnh</label> <input
+									class="form-control" type="file" name="imageName">
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Hủy</button>
-						<button type="submit" id="btnAdd" class="btn btn-primary" disabled>Thêm</button>
+						<button type="submit" class="btn btn-primary" id="btnAdd" disabled>Thêm</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- EDIT & UPDATE MODAL -->
+	<div class="modal fade" id="editModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<form th:action="@{/admin/customer/update}" method="POST"
+			enctype="multipart/form-data">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Cập nhật khách
+							hàng</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<input type="hidden" id="idEdit" name="id" /> <input
+								type="hidden" id="passwordEdit" name="password" />
+							<div class="form-group col-md-6">
+								<label class="form-label">Tên khách hàng</label> <input
+									class="form-control" type="text" id="usernameEdit"
+									name="username" placeholder="Tên khách hàng">
+							</div>
+							<div class="form-group col-md-6">
+								<label class="form-label">Họ tên khách hàng</label> <input
+									class="form-control" type="text" id="fullnameEdit"
+									name="fullname" placeholder="Họ tên khách hàng">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label class="form-label">Email</label> <input
+									class="form-control" type="email" id="emailEdit" name="email"
+									placeholder="Email khách hàng">
+							</div>
+							<div class="form-group col-md-6">
+								<label class="form-label">Ảnh</label> <input
+									class="form-control" type="file" name="imageName">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Hủy</button>
+						<button type="submit" class="btn btn-primary">Cập nhật</button>
 					</div>
 				</div>
 			</div>
@@ -129,7 +210,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">
-						<b>Xóa loại danh mục cha</b>
+						<b>Xóa khách hàng</b>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -148,55 +229,23 @@
 		</div>
 	</div>
 
-	<!-- EDIT & UPDATE MODAL -->
-	<div class="modal fade" id="editModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/update}" method="POST">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa danh
-							mục cha</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="row">
-							<input type="hidden" id="idEdit" name="id" />
-							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
-									class="form-control" type="text" name="name" id="nameEdit"
-									placeholder="Tên danh mục cha">
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Hủy</button>
-						<button type="submit" class="btn btn-primary">Cập nhật</button>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-
 	<!-- SEARCH MODAL -->
 	<div class="modal fade" id="searchModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/search}" method="GET">
+		<form th:action="@{/admin/customer/search}" method="GET">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Tìm kiếm danh
-							mục cha</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Tìm kiếm khách
+							hàng</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="form-group">
-								<input class="form-control" type="text" name="keyword" th:value="${keyword}"
-									placeholder="Nhập từ khóa tìm kiếm">
+								<input class="form-control" type="text" name="keyword"
+									th:value="${keyword}" placeholder="Nhập từ khóa tìm kiếm">
 							</div>
 						</div>
 					</div>
@@ -211,33 +260,36 @@
 	</div>
 
 	<script>
-		// Lấy các phần tử HTML cần thiết
-		var inputs = document.getElementsByClassName('myInput');
-		var button = document.getElementById('btnAdd');
+	// Lấy các phần tử HTML cần thiết
+	var inputs = document.getElementsByClassName('myInput');
+	var button = document.getElementById('btnAdd');
 
-		Array.from(inputs).forEach(function(input) {
-			input.addEventListener('input', function() {
-				// Kiểm tra tất cả các input
-				var allInputsFilled = Array.from(inputs).every(function(input) {
-					return input.value.trim() !== '';
-				});
-
-				// Vô hiệu hóa hoặc kích hoạt nút dựa trên kết quả kiểm tra
-				button.disabled = !allInputsFilled;
+	Array.from(inputs).forEach(function(input) {
+		input.addEventListener('input', function() {
+			// Kiểm tra tất cả các input
+			var allInputsFilled = Array.from(inputs).every(function(input) {
+				return input.value.trim() !== '';
 			});
-		});
 
+			// Vô hiệu hóa hoặc kích hoạt nút dựa trên kết quả kiểm tra
+			button.disabled = !allInputsFilled;
+		});
+	});
+	
 		function showConfirmModalDialog(id) {
-			$('#yesOption').attr('href', '/anime/admin/category-parent/delete/' + id);
+			$('#yesOption').attr('href', '/anime/admin/customer/delete/' + id);
 		}
 
 		function btnEdit(id) {
-			var url = '/anime/admin/category-parent/edit/' + id;
+			var url = '/anime/admin/customer/edit/' + id;
 			fetch(url)
 			  .then(response => response.json())
 			  .then(data => {
 			    $("#idEdit").val(data.id);
-			    $("#nameEdit").val(data.name);
+			    $("#usernameEdit").val(data.username);
+			    $("#fullnameEdit").val(data.fullname);
+			    $("#emailEdit").val(data.email);
+			    $("#passwordEdit").val(data.password);
 			  })
 		}
 	</script>
