@@ -1,8 +1,8 @@
 <div class="nav-header">
 	<div class="brand-logo">
 		<a th:href="@{/admin/index}"> <img class="logo-tabib"
-			src="https://www.favicon.cc/logo3d/862154.png"
-			alt="" style="margin-left: 50px; max-width: 60px"></a>
+			src="https://www.favicon.cc/logo3d/862154.png" alt=""
+			style="margin-left: 50px; max-width: 60px"></a>
 	</div>
 </div>
 
@@ -11,13 +11,39 @@
 	<nav class="navigation">
 		<ul class="list-unstyled main-menu">
 			<li class="has-submenu active"><a th:href="@{/admin/index}">
-					<i class="fas fa-th-large"></i> <span class="nav-label">Trang
-						chủ</span>
+					<i class="fas fa-database fa-2x" style="color: #a8741a"></i><span
+					class="nav-label" style="color: #a8741a">Doanh
+						thu</span>
 			</a></li>
-			<li class="has-submenu"><a th:href="@{/admin/category-parent}">
-					<i class="fas fa-sitemap"></i> <span class="nav-label">Danh
-						mục cha</span>
-			</a>
+			<li class="has-submenu active"><a th:href="@{/admin/poster}">
+					<i class="fas fa-image" style="color: #a8741a"></i> <span
+					class="nav-label" style="color: #a8741a">Ảnh/Video bìa</span>
+			</a></li>
+			<li class="has-submenu active"><a th:href="@{/admin/unit-type}">
+					<i class="fas fa-list" style="color: #a8741a"></i> <span
+					class="nav-label" style="color: #a8741a">Đơn vị</span>
+			</a></li>
+			<li class="has-submenu active"><a
+				th:href="@{/admin/category-parent}"> <i class="fas fa-sitemap"
+					style="color: #a8741a"></i> <span class="nav-label"
+					style="color: #a8741a">Danh mục cha</span>
+			</a></li>
+			<li class="has-submenu active"><a th:href="@{/admin/category}">
+					<i class="fas fa-stream" style="color: #a8741a"></i><span
+					class="nav-label" style="color: #a8741a">Danh mục con</span>
+			</a></li>
+			<li class="has-submenu active"><a th:href="@{/admin/product}">
+					<i class="fab fa-product-hunt" style="color: #a8741a"></i><span
+					class="nav-label" style="color: #a8741a">Sản phẩm</span>
+			</a></li>
+			<li class="has-submenu active"><a th:href="@{/admin/customer}">
+					<i class="fas fa-users" style="color: #a8741a"></i><span
+					class="nav-label" style="color: #a8741a">Khách hàng</span>
+			</a></li>
+			<li class="has-submenu active"><a th:href="@{/admin/order}">
+					<i class="fas fa-shopping-bag" style="color: #a8741a"></i><span
+					class="nav-label" style="color: #a8741a">Hóa đơn</span>
+			</a></li>
 		</ul>
 	</nav>
 </aside>

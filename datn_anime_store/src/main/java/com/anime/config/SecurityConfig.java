@@ -43,6 +43,14 @@ public class SecurityConfig {
 		http.authorizeHttpRequests()
 			.antMatchers("/checkout").authenticated()
 			.antMatchers("/admin/index").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/category/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/category-parent/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/order/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/order-detail/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/product/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/unit-type/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/poster/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/customer/**").hasRole("ADMIN")
 			.anyRequest()
 			.permitAll();
 		
@@ -68,6 +76,7 @@ public class SecurityConfig {
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/index")
 			.addLogoutHandler(new SecurityContextLogoutHandler());
+		
         return http.build();
     }
 }

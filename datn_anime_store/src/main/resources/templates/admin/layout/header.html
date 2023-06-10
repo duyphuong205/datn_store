@@ -1,31 +1,28 @@
 <!-- start section header -->
 <div class="header">
 	<header class="top-head container-fluid">
-		<div class="header-right">
-			<div class="fullscreen notification_dropdown">
-				<div class="full">
-					<a class="text-dark" href="#!"
-						onclick="javascript:toggleFullScreen()"> <i
-						class="fas fa-expand"></i>
-					</a>
-				</div>
-			</div>
+	<div class="nav-control">
+			<div class="hamburger"></div>
+		</div>
+		<div class="header-right ">
 			<div class="my-account-wrapper">
 				<div class="account-wrapper">
 					<div class="account-control">
 						<a class="login header-profile" href="#" title="Sign in">
 							<div class="header-info">
-								<span>Dr Roberts</span> <small>Admin</small>
-							</div> <img src="assets/images/client.jpg" alt="people">
+								<span th:text="${@AuthGlobal.inforUser.fullname}"></span> <small
+									th:each="role : ${@AuthGlobal.inforUser.userRoles}"><small
+									th:if="${role.role.name == 'ADMIN'}"
+									th:text="${role.role.name}"></small><small
+									th:unless="${role.role.name == 'ADMIN'}"
+									th:text="${role.role.name}"></small></small>
+							</div> <img th:src="@{${@AuthGlobal.getInforUser().getAvatarUrl()}}"
+							alt="people">
 						</a>
 						<div class="account-dropdown-form dropdown-container">
 							<div class="form-content">
-								<a href="doctor-settings.html"> <i class="far fa-user"></i>
-									<span class="ml-2">Profile</span>
-								</a> <a href="#"> <i class="far fa-envelope"></i> <span
-									class="ml-2">Inbox</span>
-								</a> <a href="page-login.html"> <i class="fas fa-sign-in-alt"></i>
-									<span class="ml-2">Logout </span>
+								<a th:href="@{/logout}"> <i class="fas fa-sign-in-alt"></i>
+									<span class="ml-2">Đăng xuất</span>
 								</a>
 							</div>
 						</div>

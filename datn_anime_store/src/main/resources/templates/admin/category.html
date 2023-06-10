@@ -11,7 +11,7 @@
 							<div class="card-header fix-card">
 								<div class="row">
 									<div class="col-8">
-										<h4 class="card-title">Danh sách danh mục cha</h4>
+										<h4 class="card-title">Danh sách danh mục</h4>
 									</div>
 									<div class="col-2 float-end">
 										<button type="button" data-bs-toggle="modal"
@@ -34,18 +34,20 @@
 										<thead class="text-center">
 											<tr class="bg-primary">
 												<th class="text-white">Mã</th>
-												<th class="text-white">Tên danh mục cha</th>
-												<th class="text-white">Người tạo</th>
+												<th class="text-white">Tên danh mục</th>
+												<th class="text-white">Loại danh mục cha</th>
+												<th class="text-white">Ngày tạo</th>
 												<th class="text-white">Người sửa</th>
 												<th class="text-white">Ngày tạo</th>
 												<th class="text-white">Ngày sửa</th>
 												<th></th>
 											</tr>
 										</thead>
-										<tbody th:each="item: ${categoryParents}">
+										<tbody th:each="item: ${categories}">
 											<tr>
 												<td th:text="${item.id}"></td>
 												<td th:text="${item.name}"></td>
+												<td th:text="${item.categoryParent.name}"></td>
 												<td
 													th:text="${item.createdBy} ? ${item.createdBy} : 'Trống'"></td>
 												<td
@@ -95,21 +97,29 @@
 	<!-- ADD MODAL -->
 	<div class="modal fade" id="addModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/add}" method="POST">
+		<form th:action="@{/admin/category/add}" method="POST">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Thêm mới danh
-							mục cha</h5>
+							mục</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
+								<label class="form-label">Tên danh mục</label> <input
 									class="form-control myInput" type="text" id="name" name="name"
-									placeholder="Tên danh mục cha">
+									placeholder="Tên danh mục">
+							</div>
+							<div class="form-group">
+								<label class="form-label">Danh mục cha</label> <select
+									class="form-select form-control" id="categoryParent"
+									name="categoryParent" aria-label="Default select example">
+									<option th:each="item: ${@DataGlobal.categoryParents}"
+										th:text="${item.name}" th:value="${item.id}"></option>
+								</select>
 							</div>
 						</div>
 					</div>
@@ -129,7 +139,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">
-						<b>Xóa loại danh mục cha</b>
+						<b>Xóa loại danh mục</b>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -151,12 +161,12 @@
 	<!-- EDIT & UPDATE MODAL -->
 	<div class="modal fade" id="editModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/update}" method="POST">
+		<form th:action="@{/admin/category/update}" method="POST">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa danh
-							mục cha</h5>
+							mục</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -164,16 +174,25 @@
 						<div class="row">
 							<input type="hidden" id="idEdit" name="id" />
 							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
+								<label class="form-label">Tên danh mục</label> <input
 									class="form-control" type="text" name="name" id="nameEdit"
-									placeholder="Tên danh mục cha">
+									placeholder="Tên danh mục">
+							</div>
+							<div class="form-group">
+								<label class="form-label">Danh mục cha</label> <select
+									class="form-select form-control" id="categoryParentEdit"
+									name="categoryParent"
+									aria-label="Default select example">
+									<option th:each="item: ${@DataGlobal.categoryParents}"
+										th:text="${item.name}" th:value="${item.id}"></option>
+								</select>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Hủy</button>
-						<button type="submit" class="btn btn-primary">Cập nhật</button>
+						<button type="submit" class="btn btn-primary">Cập nhập</button>
 					</div>
 				</div>
 			</div>
@@ -183,20 +202,20 @@
 	<!-- SEARCH MODAL -->
 	<div class="modal fade" id="searchModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/search}" method="GET">
+		<form th:action="@{/admin/category/search}" method="GET">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Tìm kiếm danh
-							mục cha</h5>
+							mục</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="form-group">
-								<input class="form-control" type="text" name="keyword" th:value="${keyword}"
-									placeholder="Nhập từ khóa tìm kiếm">
+								<input class="form-control" type="text" name="keyword"
+									th:value="${keyword}" placeholder="Nhập từ khóa tìm kiếm">
 							</div>
 						</div>
 					</div>
@@ -211,33 +230,31 @@
 	</div>
 
 	<script>
-		// Lấy các phần tử HTML cần thiết
 		var inputs = document.getElementsByClassName('myInput');
 		var button = document.getElementById('btnAdd');
 
 		Array.from(inputs).forEach(function(input) {
 			input.addEventListener('input', function() {
-				// Kiểm tra tất cả các input
 				var allInputsFilled = Array.from(inputs).every(function(input) {
 					return input.value.trim() !== '';
 				});
 
-				// Vô hiệu hóa hoặc kích hoạt nút dựa trên kết quả kiểm tra
 				button.disabled = !allInputsFilled;
 			});
 		});
 
 		function showConfirmModalDialog(id) {
-			$('#yesOption').attr('href', '/anime/admin/category-parent/delete/' + id);
+			$('#yesOption').attr('href', '/anime/admin/category/delete/' + id);
 		}
 
 		function btnEdit(id) {
-			var url = '/anime/admin/category-parent/edit/' + id;
+			var url = '/anime/admin/category/edit/' + id;
 			fetch(url)
 			  .then(response => response.json())
 			  .then(data => {
 			    $("#idEdit").val(data.id);
 			    $("#nameEdit").val(data.name);
+			    $("#categoryParentEdit").val(data.categoryParent.id);
 			  })
 		}
 	</script>

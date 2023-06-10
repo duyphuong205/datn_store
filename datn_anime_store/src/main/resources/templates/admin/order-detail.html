@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
+<body>
+	<div class="content-body">
+		<div class="warper container-fluid">
+			<div class="all-patients main_container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header fix-card">
+								<div class="row">
+									<div class="col-8">
+										<h4 class="card-title">Danh sách hóa đơn chi tiết</h4>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover text-center">
+										<thead class="text-center">
+											<tr class="bg-primary">
+												<th class="text-white">Tên sản phẩm</th>
+												<th class="text-white">Ảnh</th>
+												<th class="text-white">Giá</th>
+												<th class="text-white">Số lượng</th>
+												<th class="text-white">Thành tiền</th>
+											</tr>
+										</thead>
+										<tbody th:each="item: ${orderDetails}">
+											<tr>
+												<td th:text="${item.product.name}"></td>
+												<td><img
+													th:src="@{${item.getProduct().getImagesProducts().get(0).getImageUrl()}}"
+													alt="" style="width: 55px; height: 55px"
+													class="rounded-circle" /></td>
+												<td
+													th:text="${#numbers.formatDecimal(item.price, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></td>
+												<td th:text="${item.quantity}"></td>
+												<td
+													th:text="${#numbers.formatDecimal(item.price * item.quantity, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></td>
+											</tr>
+										</tbody>
+									</table>
+									<nav aria-label="Page navigation example mb-2">
+										<ul class="pagination justify-content-end">
+											<li
+												th:class="${currentPage == 1} ? 'page-item disabled' : ''"><a
+												th:href="@{${currentPage > 1} ? ${'?page=' + (currentPage - 1)}}"
+												class="page-link">Trước</a></li>
+											<li th:each="i: ${#numbers.sequence(1, totalPages)}"
+												th:class="${currentPage == i} ? 'active page-item' : ''"><a
+												class="page-link" th:href="@{'?page=' + ${i}}"
+												th:text="${i}"></a></li>
+											<li
+												th:class="${currentPage == totalPages} ? 'page-item disabled' : ''"><a
+												th:href="@{${curretnPage < totalPages} ? ${'?page=' + (currentPage + 1)}}"
+												class="page-link">Sau</a></li>
+										</ul>
+									</nav>
+								</div>
+								<div class="row">
+								<div class="col-md-12">
+									<a  class="bg-primary"
+										style="color: white; padding: 10px; border-radius: 5px 5px 5px 5px"
+										th:href="@{/admin/order}"><i class="fas fa-backward"></i> Trở lại</a>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

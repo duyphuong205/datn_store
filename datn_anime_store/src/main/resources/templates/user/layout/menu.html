@@ -95,7 +95,8 @@
 														class="megamenu-title" th:text="${itemParent.name}"></span>
 														<ul>
 															<li th:each="item: ${itemParent.categories}"><a
-																href="shop-fullwidth.html" th:text="${item.name}"></a></li>
+																th:href="@{|/shop/category/${item.name}|}"
+																th:text="${item.name}"></a></li>
 														</ul></li>
 												</ul></li>
 											<li><a th:href="@{/shop-discount}">Giảm giá</a></li>

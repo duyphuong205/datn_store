@@ -10,15 +10,8 @@
 						<div class="card">
 							<div class="card-header fix-card">
 								<div class="row">
-									<div class="col-8">
-										<h4 class="card-title">Danh sách danh mục cha</h4>
-									</div>
-									<div class="col-2 float-end">
-										<button type="button" data-bs-toggle="modal"
-											data-bs-target="#searchModal"
-											class="btn btn-secondary float-end">
-											<i class="fas fa-search"></i> Tìm kiếm
-										</button>
+									<div class="col-10">
+										<h4 class="card-title">Danh sách ảnh/video bìa</h4>
 									</div>
 									<div class="col-2 float-end">
 										<button type="button" data-bs-toggle="modal"
@@ -34,7 +27,7 @@
 										<thead class="text-center">
 											<tr class="bg-primary">
 												<th class="text-white">Mã</th>
-												<th class="text-white">Tên danh mục cha</th>
+												<th class="text-white">Ảnh/Video</th>
 												<th class="text-white">Người tạo</th>
 												<th class="text-white">Người sửa</th>
 												<th class="text-white">Ngày tạo</th>
@@ -42,10 +35,13 @@
 												<th></th>
 											</tr>
 										</thead>
-										<tbody th:each="item: ${categoryParents}">
+										<tbody th:each="item: ${posters}">
 											<tr>
 												<td th:text="${item.id}"></td>
-												<td th:text="${item.name}"></td>
+												<td><img
+													th:src="@{${item.imageUrl}}"
+													th:alt="${item.imageUrl}" style="width: 70px; height: 70px"
+													class="rounded-circle" /></td>
 												<td
 													th:text="${item.createdBy} ? ${item.createdBy} : 'Trống'"></td>
 												<td
@@ -95,21 +91,20 @@
 	<!-- ADD MODAL -->
 	<div class="modal fade" id="addModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/add}" method="POST">
+		<form th:action="@{/admin/poster/add}" method="POST">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Thêm mới danh
-							mục cha</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Thêm mới ảnh/video bìa</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
-									class="form-control myInput" type="text" id="name" name="name"
-									placeholder="Tên danh mục cha">
+								<label class="form-label">Đường dẫn ảnh/video bìa</label> <input
+									class="form-control myInput" type="text" id="imageUrl" name="imageUrl"
+									placeholder="Đường dẫn ảnh/video bìa">
 							</div>
 						</div>
 					</div>
@@ -129,7 +124,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">
-						<b>Xóa loại danh mục cha</b>
+						<b>Xóa ảnh/video bìa</b>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -151,12 +146,11 @@
 	<!-- EDIT & UPDATE MODAL -->
 	<div class="modal fade" id="editModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/update}" method="POST">
+		<form th:action="@{/admin/poster/update}" method="POST">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa danh
-							mục cha</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa ảnh/video bìa</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -164,9 +158,9 @@
 						<div class="row">
 							<input type="hidden" id="idEdit" name="id" />
 							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
-									class="form-control" type="text" name="name" id="nameEdit"
-									placeholder="Tên danh mục cha">
+								<label class="form-label">Đường dẫn ảnh/video bìa</label> <input
+									class="form-control" type="text" name="imageUrl" id="imageUrlEdit"
+									placeholder="Đường dẫn ảnh/video bìa">
 							</div>
 						</div>
 					</div>
@@ -174,36 +168,6 @@
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Hủy</button>
 						<button type="submit" class="btn btn-primary">Cập nhật</button>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-
-	<!-- SEARCH MODAL -->
-	<div class="modal fade" id="searchModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/search}" method="GET">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Tìm kiếm danh
-							mục cha</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="row">
-							<div class="form-group">
-								<input class="form-control" type="text" name="keyword" th:value="${keyword}"
-									placeholder="Nhập từ khóa tìm kiếm">
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Hủy</button>
-						<button type="submit" class="btn btn-primary">Tìm</button>
 					</div>
 				</div>
 			</div>
@@ -228,16 +192,16 @@
 		});
 
 		function showConfirmModalDialog(id) {
-			$('#yesOption').attr('href', '/anime/admin/category-parent/delete/' + id);
+			$('#yesOption').attr('href', '/anime/admin/poster/delete/' + id);
 		}
 
 		function btnEdit(id) {
-			var url = '/anime/admin/category-parent/edit/' + id;
+			var url = '/anime/admin/poster/edit/' + id;
 			fetch(url)
 			  .then(response => response.json())
 			  .then(data => {
 			    $("#idEdit").val(data.id);
-			    $("#nameEdit").val(data.name);
+			    $("#imageUrlEdit").val(data.imageUrl);
 			  })
 		}
 	</script>

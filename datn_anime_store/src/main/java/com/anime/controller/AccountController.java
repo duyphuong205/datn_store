@@ -58,6 +58,24 @@ public class AccountController {
 		return "user/login";
 	}
 
+//	@RequestMapping("/oauth2/login/success")
+//	public String oauth2LoginSuccess(OAuth2AuthenticationToken auth) {
+//		OAuth2User socialUser = auth.getPrincipal();
+//		String email = socialUser.getAttributes().get("email").toString();
+//		try {
+//			User account = userService.getByUsernameOrEmail(email);
+//			userService.setAccount(account);
+//			Role role = roleService.getByName(RoleConstant.ROLE_CUSTOMER);
+//			UserRole userRole = new UserRole();
+//			userRole.setRole(role);
+//			userRole.setUser(account);
+//		} catch (Exception e) {
+//			User account = userService.createFromSocial(socialUser);
+//			userService.setAccount(account);
+//		}
+//		return "forward:/index";
+//	}
+
 	@GetMapping("/register")
 	public String doShowRegister(Model model) {
 		model.addAttribute("userReq", new User());
@@ -126,7 +144,7 @@ public class AccountController {
 				mailService.send(email, "Mật Khẩu Mới",
 						"<html><body><div style='margin-left: 22%;'><div class='card' style='width: 600px;'><div style='background-color: #252f3d; height: 50px; border-top-left-radius: 10px; border-top-right-radius: 10px;'><h2 style='color: white; text-align: center; padding-top: 10px;;'>Anime Store</h2></div><div class='card-body' style='border: 1px solid rgb(237, 236, 236);'><b style='font-size: 20px; padding-left: 15px;'>Được xác nhận từ địa chỉ email của bạn</b><p style='padding-top: 10px; padding-left: 15px; padding-right: 15px;'>Đây là mật khẩu mới sẽ được sử dụng trong suốt quá trình sử dụng hệ thống và mua sắm của chúng tôi. Vui lòng không được cung cấp mật khẩu hoặc văn bản này ra bên ngoài. Cảm ơn quý khách!</p><div style='text-align: center; padding-bottom: 15px;'><b>Mật khẩu mới</b><h1 style='font-weight: 900; color: red;'>"
 								+ rdPassoword
-								+ "</h1></div><hr /><div style='margin-bottom: 10px;'><b style='padding-left: 15px; margin-bottom: 10px;'>Bạn muốn đăng nhập? <a href='http://localhost:8080/anime-shop/login'>Đăng nhập tại đây</a></b></div></div></div></div></body></html>");
+								+ "</h1></div><hr /><div style='margin-bottom: 10px;'><b style='padding-left: 15px; margin-bottom: 10px;'>Bạn muốn đăng nhập? <a href='http://localhost:8080/anime/login'>Đăng nhập tại đây</a></b></div></div></div></div></body></html>");
 				redirectAttributes.addFlashAttribute("message", "Vui lòng kiểm tra email của bạn!");
 			}
 		} catch (Exception ex) {

@@ -1,8 +1,14 @@
 package com.anime.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +19,7 @@ import com.anime.entity.Role;
 import com.anime.entity.User;
 import com.anime.entity.UserRole;
 import com.anime.repo.UserRepo;
+import com.anime.security.Account;
 import com.anime.service.RoleService;
 import com.anime.service.UserRoleService;
 import com.anime.service.UserService;
@@ -86,4 +93,54 @@ public class UserServiceImpl implements UserService {
 	public void updatePassword(String password, Long id) {
 		userRepo.updatePassword(password, id);
 	}
+
+	@Override
+	public Page<User> getListCustomer(Pageable pageable) {
+		return userRepo.findAllCustomer(ActiveConstant.ENABLE, pageable);
+	}
+
+	@Override
+	public User createCustomer(User user) {
+		try {
+			user.setPassword(HashPasswordConstant.ENCODER.encode(user.getPassword()));
+			userRepo.save(user);
+			Role role = roleService.getByName(RoleConstant.ROLE_CUSTOMER);
+			UserRole userRole = new UserRole();
+			userRole.setUser(user);
+			userRole.setRole(role);
+			userRoleService.create(userRole);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return user;
+	}
+
+	@Override
+	public void deleteLogical(Long id) throws SQLException {
+		userRepo.deleteLogical(ActiveConstant.DISABLE, id);
+	}
+
+	@Override
+	public Page<User> getListSearchCustomer(String keyword, Pageable pageable) {
+		return userRepo.findAllSearchCustomer(ActiveConstant.ENABLE, keyword, pageable);
+	}
+
+	@Override
+	public User getByUsernameOrEmail(String username) {
+		return userRepo.findByUsernameOrEmail(username);
+	}
+
+	@Override
+	public void setAccount(Account account) {
+		Authentication auth = new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
+
+//	@Override
+//	public User createFromSocial(OAuth2User socialUser) {
+//		User user = new User(socialUser);
+//		userRepo.save(user);
+//		return this.getByUsernameOrEmail(user.getEmail());
+//	}
 }

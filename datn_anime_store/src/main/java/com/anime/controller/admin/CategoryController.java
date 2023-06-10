@@ -14,95 +14,94 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anime.entity.CategoryParent;
-import com.anime.service.CategoryParentService;
+import com.anime.entity.Category;
+import com.anime.service.CategoryService;
 import com.anime.utils.SessionUtil;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class CategoryParentController {
+public class CategoryController {
 
-	private final CategoryParentService categoryParentService;
+	private final CategoryService categoryService;
 
 	private final SessionUtil session;
 
-	@GetMapping("/admin/category-parent")
+	@GetMapping("/admin/category")
 	public String doShowView(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int pageNumber,
 			@RequestParam(value = "size", required = false, defaultValue = "5") int pageSize) {
-		List<CategoryParent> categoryParents = new ArrayList<>();
+		List<Category> categories = new ArrayList<>();
 		try {
-			Page<CategoryParent> pageCategoryParents = categoryParentService
-					.getByIsActice(PageRequest.of(pageNumber - 1, pageSize));
-			categoryParents = pageCategoryParents.getContent();
-			model.addAttribute("totalPages", pageCategoryParents.getTotalPages());
+			Page<Category> pageCategories = categoryService.getByIsActice(PageRequest.of(pageNumber - 1, pageSize));
+			categories = pageCategories.getContent();
+			model.addAttribute("totalPages", pageCategories.getTotalPages());
 			model.addAttribute("currentPage", pageNumber);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		model.addAttribute("categoryParents", categoryParents);
-		return "admin/category-parent";
+		model.addAttribute("categories", categories);
+		return "admin/category";
 	}
 
-	@PostMapping("/admin/category-parent/add")
-	public String doAdd(CategoryParent categoryParent) {
+	@PostMapping("/admin/category/add")
+	public String doAdd(Category category) {
 		try {
-			categoryParentService.create(categoryParent);
+			categoryService.create(category);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		return "redirect:/admin/category-parent";
+		return "redirect:/admin/category";
 	}
 
 	@ResponseBody
-	@GetMapping("/admin/category-parent/edit/{id}")
-	public CategoryParent doEdit(@PathVariable("id") Long id) {
-		return categoryParentService.findById(id);
+	@GetMapping("/admin/category/edit/{id}")
+	public Category doEdit(@PathVariable("id") Long id) {
+		return categoryService.findById(id);
 	}
 
-	@PostMapping("/admin/category-parent/update")
-	public String doUpdate(CategoryParent categoryParent) {
+	@PostMapping("/admin/category/update")
+	public String doUpdate(Category category) {
 		try {
-			categoryParentService.update(categoryParent);
+			categoryService.update(category);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		return "redirect:/admin/category-parent";
+		return "redirect:/admin/category";
 	}
 
-	@GetMapping("/admin/category-parent/delete/{id}")
+	@GetMapping("/admin/category/delete/{id}")
 	public String doDelete(@PathVariable("id") Long id) {
 		try {
-			categoryParentService.deleteLogical(id);
+			categoryService.deleteLogical(id);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		return "redirect:/admin/category-parent";
+		return "redirect:/admin/category";
 	}
 
-	@GetMapping("/admin/category-parent/search")
+	@GetMapping("/admin/category/search")
 	public String doSearch(Model model, 
 			@RequestParam(value = "keyword", required = false) Optional<String> kw,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int pageNumber,
 			@RequestParam(value = "size", required = false, defaultValue = "5") int pageSize) {
-		List<CategoryParent> categoryParents = new ArrayList<>();
+		List<Category> categories = new ArrayList<>();
 		try {
 			String keyword = kw.orElse(session.getAttribute("keyword"));
 			session.setAttribute("keyword", keyword);
-			Page<CategoryParent> pageCategoryParents = categoryParentService.getByKeyword(keyword,
+			Page<Category> pageCategories = categoryService.getByKeyword(keyword,
 					PageRequest.of(pageNumber - 1, pageSize));
-			categoryParents = pageCategoryParents.getContent();
-			model.addAttribute("totalPages", pageCategoryParents.getTotalPages());
+			categories = pageCategories.getContent();
+			model.addAttribute("totalPages", pageCategories.getTotalPages());
 			model.addAttribute("currentPage", pageNumber);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		model.addAttribute("categoryParents", categoryParents);
-		return "admin/category-parent";
+		model.addAttribute("categories", categories);
+		return "admin/category";
 	}
 }

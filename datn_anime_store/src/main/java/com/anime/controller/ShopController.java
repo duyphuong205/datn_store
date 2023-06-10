@@ -29,9 +29,9 @@ public class ShopController {
 	private final ProductService productService;
 
 	private final ImagesProductService imagesProductService;
-	
+
 	private final SessionUtil session;
-	
+
 	private final ReviewService reviewService;
 
 	@GetMapping("/shop")
@@ -64,12 +64,12 @@ public class ShopController {
 		List<ImagesProduct> images = imagesProductService.getByProductId(productResp.getId());
 		model.addAttribute("images", images);
 		model.addAttribute("product", productResp);
-		
-		
+
 		// display review
 		List<Review> reviews = new ArrayList<>();
 		try {
-			Page<Review> reviewPage = reviewService.getByProductId(productResp.getId(), PageRequest.of(pageNum - 1, pageSize));
+			Page<Review> reviewPage = reviewService.getByProductId(productResp.getId(),
+					PageRequest.of(pageNum - 1, pageSize));
 			reviews = reviewPage.getContent();
 			model.addAttribute("totalPages", reviewPage.getTotalPages());
 		} catch (Exception ex) {
@@ -77,10 +77,10 @@ public class ShopController {
 		}
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("reviews", reviews);
-		
+
 		return "user/product-detail";
 	}
-	
+
 	@GetMapping("/shop/category/{name}")
 	public String doFindByCategoryName(@RequestParam(value = "page", required = false, defaultValue = "1") int pageNum,
 			@RequestParam(value = "size", required = false, defaultValue = "9") int pageSize, Model model,
@@ -97,7 +97,7 @@ public class ShopController {
 		model.addAttribute("products", products);
 		return "/user/shop";
 	}
-	
+
 	@GetMapping("/shop/search")
 	public String doSearchProduct(Model model, @RequestParam(value = "keyword", required = false) Optional<String> kw,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int pageNumber,
@@ -106,8 +106,7 @@ public class ShopController {
 		try {
 			String keyword = kw.orElse(session.getAttribute("keyword"));
 			session.setAttribute("keyword", keyword);
-			Page<Product> pageProducts = productService.getByKeyword(keyword,
-					PageRequest.of(pageNumber - 1, pageSize));
+			Page<Product> pageProducts = productService.getByKeyword(keyword, PageRequest.of(pageNumber - 1, pageSize));
 			products = pageProducts.getContent();
 			model.addAttribute("totalPages", pageProducts.getTotalPages());
 			model.addAttribute("currentPage", pageNumber);
@@ -118,7 +117,7 @@ public class ShopController {
 		model.addAttribute("products", products);
 		return "user/shop";
 	}
-	
+
 	@GetMapping("/shop/searchPrice")
 	public String doSearchPriceProduct(Model model, @RequestParam(value = "min", required = false) Optional<Double> min,
 			@RequestParam(value = "max", required = false) Optional<Double> max,
@@ -142,5 +141,69 @@ public class ShopController {
 		}
 		model.addAttribute("products", products);
 		return "user/shop";
+	}
+
+	@GetMapping("/shop/sortPriceDesc")
+	public String sortPriceDesc(@RequestParam(value = "page", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(value = "size", required = false, defaultValue = "9") int pageSize, Model model) {
+		List<Product> products = new ArrayList<>();
+		try {
+			Page<Product> pageProducts = productService.sortHightToLow(PageRequest.of(pageNum - 1, pageSize));
+			products = pageProducts.getContent();
+			model.addAttribute("totalPages", pageProducts.getTotalPages());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("products", products);
+		return "/user/shop";
+	}
+
+	@GetMapping("/shop/sortPriceAsc")
+	public String sortPriceAsc(@RequestParam(value = "page", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(value = "size", required = false, defaultValue = "9") int pageSize, Model model) {
+		List<Product> products = new ArrayList<>();
+		try {
+			Page<Product> pageProducts = productService.sortLowToHight(PageRequest.of(pageNum - 1, pageSize));
+			products = pageProducts.getContent();
+			model.addAttribute("totalPages", pageProducts.getTotalPages());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("products", products);
+		return "/user/shop";
+	}
+
+	@GetMapping("/shop/sortViewDesc")
+	public String sortViewDesc(@RequestParam(value = "page", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(value = "size", required = false, defaultValue = "9") int pageSize, Model model) {
+		List<Product> products = new ArrayList<>();
+		try {
+			Page<Product> pageProducts = productService.sortView(PageRequest.of(pageNum - 1, pageSize));
+			products = pageProducts.getContent();
+			model.addAttribute("totalPages", pageProducts.getTotalPages());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("products", products);
+		return "/user/shop";
+	}
+
+	@GetMapping("/shop/sortSelledDesc")
+	public String sortSelledDesc(@RequestParam(value = "page", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(value = "size", required = false, defaultValue = "9") int pageSize, Model model) {
+		List<Product> products = new ArrayList<>();
+		try {
+			Page<Product> pageProducts = productService.sortSelled(PageRequest.of(pageNum - 1, pageSize));
+			products = pageProducts.getContent();
+			model.addAttribute("totalPages", pageProducts.getTotalPages());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("products", products);
+		return "/user/shop";
 	}
 }

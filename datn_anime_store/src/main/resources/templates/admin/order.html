@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
+<body>
+	<div class="content-body">
+		<div class="warper container-fluid">
+			<div class="all-patients main_container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header fix-card">
+								<div class="row">
+									<div class="col-8">
+										<h4 class="card-title">Danh sách hóa đơn</h4>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-5">
+										<form th:action="@{/admin/order}" method="GET">
+											<div class="form-group">
+												<label for="sel1">Chọn người dùng:</label> <select
+													name="username" onchange="this.form.submit()"
+													class="form-control" id="sel1">
+													<option th:each="item: ${usernames}" th:text="${item}"
+														th:value="${item}"
+														th:selected="${item} == ${currentUsername}"></option>
+												</select>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover text-center">
+										<thead class="text-center">
+											<tr class="bg-primary">
+												<th class="text-white">Mã</th>
+												<th class="text-white">Tên người mua</th>
+												<th class="text-white">Địa chỉ</th>
+												<th class="text-white">Số điện thoại</th>
+												<th class="text-white">Ngày đặt</th>
+												<th class="text-white">Ngày chỉnh sửa</th>
+												<th class="text-white">PT thanh toán</th>
+												<th class="text-white">Trạng thái</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody th:each="item: ${orders}">
+											<tr>
+												<td th:text="${item.id}"></td>
+												<td th:text="${item.user.fullname}"></td>
+												<td th:text="${item.address}"></td>
+												<td th:text="${item.phone}"></td>
+												<td
+													th:text="${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')} ? ${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')} : 'Trống'"></td>
+												<td
+													th:text="${#dates.format(item.updateDate, 'dd-MM-yyyy HH:mm')} ? ${#dates.format(item.updateDate, 'dd-MM-yyyy HH:mm')} : 'Trống'"></td>
+												<td th:text="${item.paymentMethod.name}"></td>
+												<td><b th:switch="${item.orderStatus.status}"> <b
+														class="badge badge-warning text-danger font-weight-bold"
+														th:case="'0'">Đơn hàng mới</b> <b
+														class="badge badge-primary text-white font-weight-bold"
+														th:case="'1'">Đang giao</b> <b
+														class="badge badge-success text-white font-weight-bold"
+														th:case="'2'">Đã giao</b> <b
+														class="badge badge-danger text-white font-weight-bold"
+														th:case="'3'">Từ chối bán</b>
+												</b></td>
+												<td><a data-bs-toggle='modal'
+													data-bs-target='#editModal'
+													th:attr="onclick='btnEdit(\'' + ${item.id} + '\')'"
+													class='mr-4'> <span
+														class='fas fa-pencil-alt text-warning'></span>
+												</a> <a th:href="@{|/admin/order-detail/${item.id}|}" class='mr-4 delet'> <i class="text-success fas fa-info-circle"></i>
+												</a></td>
+											</tr>
+										</tbody>
+									</table>
+									<nav aria-label="Page navigation example mb-2">
+										<ul class="pagination justify-content-end">
+											<li
+												th:class="${currentPage == 1} ? 'page-item disabled' : ''"><a
+												th:href="@{${currentPage > 1} ? ${'?page=' + (currentPage - 1)}}"
+												class="page-link">Trước</a></li>
+											<li th:each="i: ${#numbers.sequence(1, totalPages)}"
+												th:class="${currentPage == i} ? 'active page-item' : ''"><a
+												class="page-link" th:href="@{'?page=' + ${i}}"
+												th:text="${i}"></a></li>
+											<li
+												th:class="${currentPage == totalPages} ? 'page-item disabled' : ''"><a
+												th:href="@{${curretnPage < totalPages} ? ${'?page=' + (currentPage + 1)}}"
+												class="page-link">Sau</a></li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- EDIT & UPDATE MODAL -->
+	<div class="modal fade" id="editModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<form th:action="@{/admin/order/update}" method="POST">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Cập nhật hóa
+							đơn</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<input type="hidden" name="id" id="idEdit" />
+							<div class="form-group col-md-12">
+								<label class="form-label">Trạng thái đơn hàng</label> <select
+									class="form-control" name="orderStatus" id="orderStatusEdit">
+									<option value="0">Đơn hàng mới</option>
+									<option value="1">Đang giao</option>
+									<option value="2">Đã giao</option>
+									<option value="3">Từ chối bán</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Hủy</button>
+						<button type="submit" class="btn btn-primary">Cập nhật</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script>function btnEdit(id) {
+			var url = '/anime/admin/order/edit/' + id;
+			fetch(url)
+			  .then(response => response.json())
+			  .then(data => {
+			    $("#idEdit").val(data.id);
+			    $("#orderStatusEdit").val(data.orderStatus.status);
+			  })
+		}
+	</script>
+</body>
+</html>

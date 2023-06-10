@@ -15,4 +15,6 @@ public interface CategoryParentService extends BaseService<CategoryParent> {
 	void deleteLogical(Long id) throws SQLException;
 	
 	Page<CategoryParent> getByIsActice(Pageable pageable);
+	
+	Page<CategoryParent> getByKeyword(String keyword, Pageable pageable);
 }

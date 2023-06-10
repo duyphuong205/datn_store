@@ -11,7 +11,7 @@
 							<div class="card-header fix-card">
 								<div class="row">
 									<div class="col-8">
-										<h4 class="card-title">Danh sách danh mục cha</h4>
+										<h4 class="card-title">Danh sách đơn vị</h4>
 									</div>
 									<div class="col-2 float-end">
 										<button type="button" data-bs-toggle="modal"
@@ -34,7 +34,7 @@
 										<thead class="text-center">
 											<tr class="bg-primary">
 												<th class="text-white">Mã</th>
-												<th class="text-white">Tên danh mục cha</th>
+												<th class="text-white">Tên đơn vị</th>
 												<th class="text-white">Người tạo</th>
 												<th class="text-white">Người sửa</th>
 												<th class="text-white">Ngày tạo</th>
@@ -42,7 +42,7 @@
 												<th></th>
 											</tr>
 										</thead>
-										<tbody th:each="item: ${categoryParents}">
+										<tbody th:each="item: ${unitTypes}">
 											<tr>
 												<td th:text="${item.id}"></td>
 												<td th:text="${item.name}"></td>
@@ -95,21 +95,20 @@
 	<!-- ADD MODAL -->
 	<div class="modal fade" id="addModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/add}" method="POST">
+		<form th:action="@{/admin/unit-type/add}" method="POST">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Thêm mới danh
-							mục cha</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Thêm mới đơn vị</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
+								<label class="form-label">Tên đơn vị</label> <input
 									class="form-control myInput" type="text" id="name" name="name"
-									placeholder="Tên danh mục cha">
+									placeholder="Tên đơn vị">
 							</div>
 						</div>
 					</div>
@@ -129,7 +128,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">
-						<b>Xóa loại danh mục cha</b>
+						<b>Xóa đơn vị</b>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -151,12 +150,11 @@
 	<!-- EDIT & UPDATE MODAL -->
 	<div class="modal fade" id="editModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/update}" method="POST">
+		<form th:action="@{/admin/unit-type/update}" method="POST">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa danh
-							mục cha</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa đơn vị</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -164,7 +162,7 @@
 						<div class="row">
 							<input type="hidden" id="idEdit" name="id" />
 							<div class="form-group">
-								<label class="form-label">Tên danh mục cha</label> <input
+								<label class="form-label">Tên đơn vị</label> <input
 									class="form-control" type="text" name="name" id="nameEdit"
 									placeholder="Tên danh mục cha">
 							</div>
@@ -183,12 +181,11 @@
 	<!-- SEARCH MODAL -->
 	<div class="modal fade" id="searchModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/admin/category-parent/search}" method="GET">
+		<form th:action="@{/admin/unit-type/search}" method="GET">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Tìm kiếm danh
-							mục cha</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Tìm kiếm đơn vị</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -228,11 +225,11 @@
 		});
 
 		function showConfirmModalDialog(id) {
-			$('#yesOption').attr('href', '/anime/admin/category-parent/delete/' + id);
+			$('#yesOption').attr('href', '/anime/admin/unit-type/delete/' + id);
 		}
 
 		function btnEdit(id) {
-			var url = '/anime/admin/category-parent/edit/' + id;
+			var url = '/anime/admin/unit-type/edit/' + id;
 			fetch(url)
 			  .then(response => response.json())
 			  .then(data => {

@@ -16,38 +16,53 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(rollbackFor = {Throwable.class})
+@Transactional(rollbackFor = { Throwable.class })
 public class OrderServiceImpl implements OrderService {
-    private final OrderRepo orderRepo;
+	private final OrderRepo orderRepo;
 
-    @Override
-    public List<Order> getAll() {
-        return orderRepo.findAll();
-    }
+	@Override
+	public List<Order> getAll() {
+		return orderRepo.findAll();
+	}
 
-    @Override
-    public Order findById(Long id) {
-        Optional<Order> order = orderRepo.findById(id);
-        return order.isPresent() ? order.get() : null;
-    }
+	@Override
+	public Order findById(Long id) {
+		Optional<Order> order = orderRepo.findById(id);
+		return order.isPresent() ? order.get() : null;
+	}
 
-    @Override
-    public Order create(Order entity) {
-        return orderRepo.save(entity);
-    }
+	@Override
+	public Order create(Order entity) {
+		return orderRepo.save(entity);
+	}
 
-    @Override
-    public Order update(Order entity) {
-        return orderRepo.save(entity);
-    }
+	@Override
+	public Order update(Order entity) {
+		return orderRepo.save(entity);
+	}
 
-    @Override
-    public void delete(Long id) {
-        orderRepo.deleteById(id);
-    }
+	@Override
+	public void delete(Long id) {
+		orderRepo.deleteById(id);
+	}
 
 	@Override
 	public Page<Order> findOrdersByOrderStatusAndUsername(Integer status, String username, Pageable pageable) {
 		return orderRepo.findOrdersByOrderStatusAndUsername(status, username, ActiveConstant.ENABLE, pageable);
+	}
+
+	@Override
+	public Page<Order> getByIsActive(Pageable pageable) {
+		return orderRepo.findByIsActive(ActiveConstant.ENABLE, pageable);
+	}
+
+	@Override
+	public List<String> getListUsernameOrdered() {
+		return orderRepo.findUsernameOrdered();
+	}
+
+	@Override
+	public Page<Order> getOrdersByUsername(String username, Pageable pageable) {
+		return orderRepo.findOrdersByUsername(username, ActiveConstant.ENABLE, pageable);
 	}
 }
