@@ -1,336 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
+	  th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
 <body>
-	<div class="content-body">
-		<div class="warper container-fluid">
-			<div class="all-patients main_container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header fix-card">
-								<div class="row">
-									<div class="col-8">
-										<h4 class="card-title">Danh sách</h4>
-									</div>
-									<div class="col-4 float-end">
-										<button type="button" data-bs-toggle="modal"
-											data-bs-target="#addModal" class="btn btn-primary float-end">Thêm
-											mới</button>
-									</div>
+<div class="content-body">
+	<div class="warper container-fluid">
+		<div class="all-patients main_container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-header fix-card">
+							<div class="row">
+								<div class="col-8">
+									<h4 class="card-title">Danh sách</h4>
+								</div>
+								<div class="col-4 float-end">
+									<button type="button" data-bs-toggle="modal"
+											data-bs-target="#modal" class="btn btn-primary float-end">Thêm
+										mới
+									</button>
 								</div>
 							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="example2" class="display nowrap">
-										<thead>
-											<tr>
-												<th></th>
-												<th>First Name</th>
-												<th>Last name</th>
-												<th>Email</th>
-												<th>Mobile No.</th>
-												<th>Birthday</th>
-												<th>Marital status</th>
-												<th>Sex</th>
-												<th>Blood Group</th>
-												<th>Patient Weight</th>
-												<th>Patient Height</th>
-												<th>Address</th>
-												<th>Patient History</th>
-												<th>Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user1.jpg" alt=""></td>
-												<td>Airi</td>
-												<td>Satou</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user2.jpg" alt=""></td>
-												<td>Angelica</td>
-												<td>Ramos</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user3.jpg" alt=""></td>
-												<td>Ashton</td>
-												<td>Cox</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user4.jpg" alt=""></td>
-												<td>Bradley</td>
-												<td>Greer</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user5.jpg" alt=""></td>
-												<td>Brenden</td>
-												<td>Wagner</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user6.jpg" alt=""></td>
-												<td>Brielle</td>
-												<td>Williamson</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user7.jpg" alt=""></td>
-												<td>Bruno</td>
-												<td>Nash</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user8.jpg" alt=""></td>
-												<td>Caesar</td>
-												<td>Vance</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user9.jpg" alt=""></td>
-												<td>Cara</td>
-												<td>Stevens</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user10.jpg" alt=""></td>
-												<td>Cedric</td>
-												<td>Kelly</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user11.jpg" alt=""></td>
-												<td>Charde</td>
-												<td>Marshall</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user12.jpg" alt=""></td>
-												<td>Colleen</td>
-												<td>Hurst</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td>41</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-											<tr>
-												<td><img class="rounded-circle" width="35"
-													src="assets/images/patients/user12.jpg" alt=""></td>
-												<td>Daidai</td>
-												<td>Rios</td>
-												<td>test@gmail.com</td>
-												<td>658543469</td>
-												<td>2011/04/25</td>
-												<td>Maried</td>
-												<td>Male</td>
-												<td>A +</td>
-												<td>61</td>
-												<td class="text-end">41</td>
-												<td class="text-end">lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td>lorem ipsum kwjhdkj jkdhjkfds</td>
-												<td><a class='mr-4 vue'> <span class='fa fa-eye'
-														aria-hidden='true'></span>
-												</a> <a data-bs-toggle='modal' data-bs-target='#modal-edit'
-													class='mr-4'> <span class='fas fa-pencil-alt'></span>
-												</a> <a class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
-												</a></td>
-											</tr>
-										</tbody>
-									</table>
+						</div>
+						<div class="card-body">
+							<div style="width: 150px; margin-bottom: 10px; margin-top: -20px">
+								<select th:onchange="" class="form-select form-select-sm" aria-label=".form-select-sm example">
+									<option selected value="10">
+										<a th:href="@{'/admin/category-parent?pageNum=1'}">10</a>
+									</option>
+									<option value="20">
+										<a th:href="@{'/admin/category-parent?pageNum=1'}">10</a>
+									</option>
+									<option value="50">50</option>
+									<option value="100">100</option>
+								</select>
+							</div>
+
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+									<tr>
+										<th>ID</th>
+										<th>Tên danh mục</th>
+										<th>Tạo bởi</th>
+										<th>Ngày tạo</th>
+										<th>Cập nhật bởi</th>
+										<th>Ngày cập nhật</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr th:each="cat : ${categoryParents}">
+										<!--												<td><img class="rounded-circle" width="35"-->
+										<!--													src="assets/images/patients/user1.jpg" alt=""></td>-->
+										<td th:text="${cat.id}"></td>
+										<td th:text="${cat.name}"></td>
+										<td th:text="${cat.createdBy}"></td>
+										<td th:text="${cat.createDate}"></td>
+										<td th:text="${cat.updatedBy != null ? cat.updatedBy : '-'}"></td>
+										<td th:text="${cat.updateDate != null ? cat.updateDate : '-'}"></td>
+										<td><a data-bs-toggle="modal" data-bs-target="#modal"
+											   class='mr-4 vue'> <span class='fa fa-eye' aria-hidden='true'></span>
+										</a> <a data-bs-toggle="modal"
+												data-bs-target="#modal"
+												class='mr-4'> <span class='fas fa-pencil-alt'></span>
+										</a> <a th:href="@{/admin/category-parent/delete/{id}(id=${cat.id})}"
+												class='mr-4 delet'> <span class='fas fa-trash-alt'></span>
+										</a></td>
+									</tr>
+									</tbody>
+								</table>
+								<div style="float: left">
+									Trang: [[${currentPage}]]/[[${totalPages}]]
 								</div>
+								<ul class="pagination" style="float: right">
+									<li class="page-item">
+										<a th:if="${currentPage > 1}" th:href="@{'/admin/category-parent?pageNum=1'}"
+										   class="page-link">First</a></li>
+									<li class="page-item">
+										<a th:if="${currentPage > 1}"
+										   th:href="@{'/admin/category-parent?pageNum=' + ${currentPage - 1}}"
+										   class="page-link">Previous</a></li>
+									<li th:each="i: ${#numbers.sequence(1, totalPages)}" class="page-item">
+										<a th:if="${currentPage != i}" th:href="@{'/admin/category-parent?pageNum=' + ${i}}"
+										   class="page-link">[[${i}]]</a></li>
+									<li class="page-item">
+										<a th:if="${currentPage < totalPages}"
+										   th:href="@{'/admin/category-parent?pageNum=' + ${currentPage + 1}}"
+										   class="page-link">Next</a></li>
+									<li class="page-item">
+										<a th:if="${currentPage < totalPages}"
+										   th:href="@{'/admin/category-parent?pageNum=' + ${totalPages}}"
+										   class="page-link">Last</a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -338,48 +99,65 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-	<!-- ADD MODAL -->
-	<div class="modal fade" id="addModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Thêm mới danh
-						mục cha</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
+<!-- VIEW MODAL -->
+<div class="modal fade" id="modal" tabindex="-1"
+	 aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Thêm mới danh
+					mục cha</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="form-group">
-							<label class="form-label">Tên danh mục cha</label> <input
-								class="form-control" type="text" id="name"
-								placeholder="Tên danh mục cha"> <span
+			</div>
+			<form class="modal-body" action="#" th:action="@{/admin/category-parent/create}" ,
+				  th:object="${categoryParentForm}" method="post">
+				<div class="row">
+					<div th:if="${id}" class="form-group">
+						<label class="form-label">Tên danh mục cha</label> <input
+							th:field="*{id}" disabled
+							class="form-control" type="text" id="id"
+							placeholder="ID"> <span
+							class="text-danger" id="id_error"></span>
+					</div>
+					<div class="form-group">
+						<label class="form-label-danger">Tên danh mục cha</label> <input
+							th:field="*{name}"
+							class="form-control" type="text" id="name"
+							placeholder="Tên danh mục cha">
+						<span
 								class="text-danger" id="name_error"></span>
+					</div>
+					<div class="form-group">
+						<label class="form-label">Trạng thái</label>
+						<div class="form-check">
+							<input th:field="*{isActive}" type="radio"
+								   class="form-check-input" value="true"
+								   name="isActive" checked>Hiển thị<label
+								class="form-check-label"></label>
 						</div>
-						<div class="form-group">
-							<label class="form-label">Trạng thái</label>
-							<div class="form-check">
-								<input type="radio" class="form-check-input" value="true"
-									name="isActive" checked>Tồn tại <label
-									class="form-check-label"></label>
-							</div>
-							<div class="form-check">
-								<input type="radio" class="form-check-input" value="false"
-									name="isActive">Không tồn tại <label
-									class="form-check-label"></label>
-							</div>
+						<div class="form-check">
+							<input th:field="*{isActive}" type="radio"
+								   class="form-check-input" value="false"
+								   name="isActive">Không hiển thị<label
+								class="form-check-label"></label>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Hủy</button>
-					<button type="button" class="btn btn-primary">Thêm</button>
+							data-bs-dismiss="modal">Hủy
+					</button>
+					<button type="submit" class="btn btn-primary">Thêm</button>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
+</div>
+
+<script type="text/javascript">
+</script>
 </body>
 </html>

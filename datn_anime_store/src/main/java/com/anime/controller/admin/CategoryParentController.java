@@ -1,83 +1,55 @@
 package com.anime.controller.admin;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.anime.entity.CategoryParent;
+import com.anime.mapping.CategoryParentMapping;
+import com.anime.service.CategoryParentService;
+import java.util.Optional;
+import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.anime.entity.CategoryParent;
-import com.anime.service.CategoryParentService;
-
-import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequiredArgsConstructor
+@RequestMapping(value = CategoryParentMapping.ADMIN)
 public class CategoryParentController {
+	@Autowired
+	private CategoryParentService categoryParentService;
 
-	private final CategoryParentService categoryParentService;
-
-	@GetMapping("/admin/category-parent")
-	public String doShowView(Model model,
-			@RequestParam(value = "page", required = false, defaultValue = "1") int pageNumber,
-			@RequestParam(value = "size", required = false, defaultValue = "5") int pageSize) {
-		List<CategoryParent> categoryParents = new ArrayList<>();
-		try {
-			Page<CategoryParent> pageCategoryParents = categoryParentService
-					.getByIsActice(PageRequest.of(pageNumber - 1, pageSize));
-			categoryParents = pageCategoryParents.getContent();
-			model.addAttribute("totalPages", pageCategoryParents.getTotalPages());
-			model.addAttribute("currentPage", pageNumber);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		model.addAttribute("categoryParents", categoryParents);
-		return "admin/category-parent";
+	@RequestMapping(value = CategoryParentMapping.CATEGORY_PARENT_PAGE, method = RequestMethod.GET)
+	public String doShowView(Model model, @RequestParam(name = "pageNum") Optional pageNum) {
+		int page = !pageNum.isEmpty() ? Integer.parseInt(pageNum.get().toString()) - 1 : 0;
+		int pageSize = 2;
+		model.addAttribute("pageSize", pageSize);
+		Page<CategoryParent> categoryParents = categoryParentService.getByIsActive(PageRequest.of(page, pageSize));
+		model.addAttribute("currentPage", page + 1);
+		model.addAttribute("totalPages", categoryParents.getTotalPages());
+		model.addAttribute("totalItems", categoryParents.getTotalElements());
+		model.addAttribute("categoryParents", categoryParents.getContent());
+		model.addAttribute("categoryParentForm", new CategoryParent());
+		return CategoryParentMapping.ADMIN_CATEGORY_PARENT;
 	}
 
-	@PostMapping("/admin/category-parent/add")
-	public String doAdd(CategoryParent categoryParent) {
-		try {
-			categoryParentService.create(categoryParent);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return "redirect:/admin/category-parent";
+	@RequestMapping(value = CategoryParentMapping.CREATE, method = RequestMethod.POST)
+	public ModelAndView doCreate(@Valid @ModelAttribute("categoryParentForm") CategoryParent categoryParent,
+								 BindingResult result) {
+		if (result.hasErrors()) { return new ModelAndView(CategoryParentMapping.REDIRECT_URL); }
+		categoryParentService.create(categoryParent);
+		return new ModelAndView(CategoryParentMapping.REDIRECT_URL);
 	}
 
-	@ResponseBody
-	@GetMapping("/admin/category-parent/edit/{id}")
-	public CategoryParent doEdit(@PathVariable("id") Long id) {
-		return categoryParentService.findById(id);
-	}
-
-	@PostMapping("/admin/category-parent/update")
-	public String doUpdate(CategoryParent categoryParent) {
-		try {
-			categoryParentService.update(categoryParent);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return "redirect:/admin/category-parent";
-	}
-
-	@GetMapping("/admin/category-parent/delete/{id}")
-	public String doDelete(@PathVariable("id") Long id) {
-		try {
-			categoryParentService.deleteLogical(id);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return "redirect:/admin/category-parent";
+	@RequestMapping(value =CategoryParentMapping.DELETE, method = RequestMethod.GET)
+	public ModelAndView doDelete(@PathVariable Long id) {
+		categoryParentService.delete(id);
+		return new ModelAndView(CategoryParentMapping.REDIRECT_URL);
 	}
 }

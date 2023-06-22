@@ -11,19 +11,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(rollbackFor = { Throwable.class })
+@Transactional(rollbackFor = {Throwable.class})
 public class CategoryParentServiceImpl implements CategoryParentService {
 	private final CategoryParentRepo categoryParentRepo;
 
 	@Override
 	public List<CategoryParent> getAll() {
 		return categoryParentRepo.findAll();
+	}
+
+	@Override
+	public Page<CategoryParent> getByIsActive(Pageable pageable) {
+		return categoryParentRepo.findByIsActive(ActiveConstant.ENABLE, pageable);
 	}
 
 	@Override
@@ -44,21 +48,11 @@ public class CategoryParentServiceImpl implements CategoryParentService {
 
 	@Override
 	public void delete(Long id) {
-		categoryParentRepo.deleteById(id);
-	}
-
-	@Override
-	public List<CategoryParent> getByIsActice() {
-		return categoryParentRepo.findByIsActive(ActiveConstant.ENABLE);
-	}
-
-	@Override
-	public void deleteLogical(Long id) throws SQLException {
-		categoryParentRepo.deleteLogical(ActiveConstant.DISABLE, id);
-	}
-
-	@Override
-	public Page<CategoryParent> getByIsActice(Pageable pageable) {
-		return categoryParentRepo.findByIsActive(ActiveConstant.ENABLE, pageable);
+		Optional<CategoryParent> categoryParentOP = categoryParentRepo.findById(id);
+		if (!categoryParentOP.isEmpty()) {
+			CategoryParent categoryParent = categoryParentOP.get();
+			categoryParent.setIsActive(false);
+			update(categoryParent);
+		}
 	}
 }
