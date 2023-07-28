@@ -60,6 +60,7 @@ public class AdminAccountController {
                 }
             }
             userService.editProfile(user);
+            model.addAttribute("avatarUserUrl", user.getAvatarUrl());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

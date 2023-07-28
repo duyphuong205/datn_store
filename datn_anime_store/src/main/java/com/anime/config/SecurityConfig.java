@@ -50,6 +50,8 @@ public class SecurityConfig {
 			.antMatchers("/admin/product/**").hasAnyRole("ADMIN", "STAFF")
 			.antMatchers("/admin/unit-type/**").hasAnyRole("ADMIN", "STAFF")
 			.antMatchers("/admin/poster/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/edit-profile/**").hasAnyRole("ADMIN", "STAFF")
+			.antMatchers("/admin/review/**").hasAnyRole("ADMIN", "STAFF")
 			.antMatchers("/admin/customer/**").hasRole("ADMIN")
 			.anyRequest()
 			.permitAll();

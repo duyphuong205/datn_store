@@ -92,10 +92,19 @@
     const unDisabledInput = () => {
         let currentPassword = document.getElementById("currentPassword");
         let newPassword = document.getElementById("newPassword");
-        if (currentPassword.value.length > 0) {
+        if (currentPassword != null) {
             newPassword.disabled = false;
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        /*<![CDATA][*/
+        let avatarUserUrl = /*[[${avatarUserUrl}]]*/'default';
+        /*]]>*/
+        let preview = document.getElementById("file-ip-1-preview");
+        preview.src = avatarUserUrl;
+        preview.style.display = "block";
+    })
 </script>
 </body>
 </html>
