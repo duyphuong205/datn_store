@@ -7,29 +7,22 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.anime.constants.RoleConstant;
+import com.anime.entity.*;
+import com.anime.service.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.anime.constants.HashPasswordConstant;
 import com.anime.constants.StatusConstant;
-import com.anime.entity.Order;
-import com.anime.entity.OrderDetail;
-import com.anime.entity.User;
-import com.anime.service.FileService;
-import com.anime.service.MailService;
-import com.anime.service.OrderDetailService;
-import com.anime.service.OrderService;
-import com.anime.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,6 +31,8 @@ import lombok.RequiredArgsConstructor;
 public class AccountController {
 
 	private final UserService userService;
+
+	private final RoleService roleService;
 
 	private final FileService fileService;
 
@@ -58,23 +53,23 @@ public class AccountController {
 		return "user/login";
 	}
 
-//	@RequestMapping("/oauth2/login/success")
-//	public String oauth2LoginSuccess(OAuth2AuthenticationToken auth) {
-//		OAuth2User socialUser = auth.getPrincipal();
-//		String email = socialUser.getAttributes().get("email").toString();
-//		try {
-//			User account = userService.getByUsernameOrEmail(email);
-//			userService.setAccount(account);
-//			Role role = roleService.getByName(RoleConstant.ROLE_CUSTOMER);
-//			UserRole userRole = new UserRole();
-//			userRole.setRole(role);
-//			userRole.setUser(account);
-//		} catch (Exception e) {
-//			User account = userService.createFromSocial(socialUser);
-//			userService.setAccount(account);
-//		}
-//		return "forward:/index";
-//	}
+	@RequestMapping("/oauth2/login/success")
+	public String oauth2LoginSuccess(OAuth2AuthenticationToken auth) {
+		OAuth2User socialUser = auth.getPrincipal();
+		String email = socialUser.getAttributes().get("email").toString();
+		try {
+			User account = userService.getByUsernameOrEmail(email);
+			userService.setAccount(account);
+			Role role = roleService.getByName(RoleConstant.ROLE_CUSTOMER);
+			UserRole userRole = new UserRole();
+			userRole.setRole(role);
+			userRole.setUser(account);
+		} catch (Exception e) {
+			User account = userService.createFromSocial(socialUser);
+			userService.setAccount(account);
+		}
+		return "redirect:/index";
+	}
 
 	@GetMapping("/register")
 	public String doShowRegister(Model model) {

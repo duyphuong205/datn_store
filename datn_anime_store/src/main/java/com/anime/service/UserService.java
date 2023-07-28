@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.anime.entity.User;
 import com.anime.security.Account;
 import com.anime.service.base.BaseService;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public interface UserService extends BaseService<User> {
 	User register(User user);
@@ -30,7 +31,7 @@ public interface UserService extends BaseService<User> {
 
 	void setAccount(Account account);
 
-//	public User createFromSocial(OAuth2User socialUser);
+	public User createFromSocial(OAuth2User socialUser);
 
 	void editProfile(User user);
 }

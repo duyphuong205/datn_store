@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -140,6 +141,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User createFromSocial(OAuth2User socialUser) {
+		User user = new User(socialUser);
+		userRepo.save(user);
+		return this.getByUsernameOrEmail(user.getEmail());
+	}
+
+	@Override
 	public void editProfile(User user) {
 		if (ObjectUtils.isNotEmpty(user) && StringUtils.isEmpty(user.getPassword())) {
 			userRepo.updateNonPass(user.getEmail(), user.getFullname(), user.getAvatarUrl(), user.getUsername());
@@ -149,11 +157,4 @@ public class UserServiceImpl implements UserService {
 			userRepo.update(user.getEmail(), hashPassword, user.getFullname(), user.getAvatarUrl(), user.getUsername());
 		}
 	}
-
-//	@Override
-//	public User createFromSocial(OAuth2User socialUser) {
-//		User user = new User(socialUser);
-//		userRepo.save(user);
-//		return this.getByUsernameOrEmail(user.getEmail());
-//	}
 }

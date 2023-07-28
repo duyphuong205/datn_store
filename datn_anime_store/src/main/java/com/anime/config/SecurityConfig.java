@@ -77,8 +77,14 @@ public class SecurityConfig {
 		http.logout()
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/index")
-			.addLogoutHandler(new SecurityContextLogoutHandler());
-		
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID")
+			.addLogoutHandler(new SecurityContextLogoutHandler()).permitAll();
+
+		http.oauth2Login()
+				.loginPage("/login")
+				.defaultSuccessUrl("/oauth2/login/success", true)
+				.failureUrl("/oauth2/login/failure");
         return http.build();
     }
 }
