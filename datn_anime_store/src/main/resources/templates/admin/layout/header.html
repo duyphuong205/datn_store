@@ -10,7 +10,7 @@
 					<div class="account-control">
 						<a class="login header-profile" href="#" title="Sign in">
 							<div class="header-info">
-								<span th:text="${@AuthGlobal.inforUser.fullname}"></span> <small
+								<span th:if="${@AuthGlobal.inforUser.fullname}" th:text="${@AuthGlobal.inforUser.fullname}"></span> <small
 									th:each="role : ${@AuthGlobal.inforUser.userRoles}"><small
 									th:if="${role.role.name == 'ADMIN'}"
 									th:text="${role.role.name}"></small><small
@@ -21,6 +21,10 @@
 						</a>
 						<div class="account-dropdown-form dropdown-container">
 							<div class="form-content">
+								<a th:href="@{/admin/edit-profile}">
+									<i class="far fa-user"></i>
+									<span class="ml-2">Thông tin cá nhân</span>
+								</a>
 								<a th:href="@{/logout}"> <i class="fas fa-sign-in-alt"></i>
 									<span class="ml-2">Đăng xuất</span>
 								</a>

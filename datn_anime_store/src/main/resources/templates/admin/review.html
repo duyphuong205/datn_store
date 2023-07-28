@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
+<body>
+	<div class="content-body">
+		<div class="warper container-fluid">
+			<div class="all-patients main_container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header fix-card">
+								<div class="row">
+									<div class="col-8">
+										<h4 class="card-title">Danh sách đánh giá</h4>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<li class="nav-item" role="presentation">
+											<button class="nav-link active" id="home-tab"
+												data-bs-toggle="tab" data-bs-target="#home" type="button"
+												role="tab" aria-controls="home" aria-selected="true">Đã
+												duyệt</button>
+										</li>
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="profile-tab"
+												data-bs-toggle="tab" data-bs-target="#profile" type="button"
+												role="tab" aria-controls="profile" aria-selected="false">Chưa
+												duyệt</button>
+										</li>
+									</ul>
+									<div class="tab-content" id="myTabContent">
+										<div class="tab-pane fade show active" id="home"
+											role="tabpanel" aria-labelledby="home-tab">
+											<table class="table table-bordered table-hover text-center">
+												<thead class="text-center">
+													<tr class="bg-primary">
+														<th class="text-white">Mã</th>
+														<th class="text-white">Số sao</th>
+														<th class="text-white">Góp ý</th>
+														<th class="text-white">Người tạo</th>
+														<th class="text-white">Người sửa</th>
+														<th class="text-white">Ngày tạo</th>
+														<th class="text-white">Ngày sửa</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody th:each="item: ${reviewAccepteds}">
+													<tr>
+														<td th:text="${item.id}"></td>
+														<td th:text="${item.rating}"></td>
+														<td th:text="${item.comment}"></td>
+														<td
+															th:text="${item.createdBy} ? ${item.createdBy} : 'Trống'"></td>
+														<td
+															th:text="${item.updatedBy} ? ${item.updatedBy} : 'Trống'"></td>
+														<td
+															th:text="${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')} ? ${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')} : 'Trống'"></td>
+														<td
+															th:text="${#dates.format(item.updateDate, 'dd-MM-yyyy HH:mm')} ? ${#dates.format(item.updateDate, 'dd-MM-yyyy HH:mm')} : 'Trống'"></td>
+														<td><a data-bs-toggle='modal'
+															data-bs-target='#editModal'
+															th:attr="onclick='btnEdit(\'' + ${item.id} + '\')'"
+															class='mr-4'> <span
+																class='fas fa-pencil-alt text-warning'></span>
+														</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="tab-pane fade" id="profile" role="tabpanel"
+											aria-labelledby="profile-tab">
+											<table class="table table-bordered table-hover text-center">
+												<thead class="text-center">
+													<tr class="bg-primary">
+														<th class="text-white">Mã</th>
+														<th class="text-white">Số sao</th>
+														<th class="text-white">Góp ý</th>
+														<th class="text-white">Người tạo</th>
+														<th class="text-white">Người sửa</th>
+														<th class="text-white">Ngày tạo</th>
+														<th class="text-white">Ngày sửa</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody th:each="item: ${reviewRefuseds}">
+													<tr>
+														<td th:text="${item.id}"></td>
+														<td th:text="${item.rating}"></td>
+														<td th:text="${item.comment}"></td>
+														<td
+															th:text="${item.createdBy} ? ${item.createdBy} : 'Trống'"></td>
+														<td
+															th:text="${item.updatedBy} ? ${item.updatedBy} : 'Trống'"></td>
+														<td
+															th:text="${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')} ? ${#dates.format(item.createDate, 'dd-MM-yyyy HH:mm')} : 'Trống'"></td>
+														<td
+															th:text="${#dates.format(item.updateDate, 'dd-MM-yyyy HH:mm')} ? ${#dates.format(item.updateDate, 'dd-MM-yyyy HH:mm')} : 'Trống'"></td>
+														<td><a data-bs-toggle='modal'
+															data-bs-target='#editModal'
+															th:attr="onclick='btnEdit(\'' + ${item.id} + '\')'"
+															class='mr-4'> <span
+																class='fas fa-pencil-alt text-warning'></span>
+														</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- EDIT & UPDATE MODAL -->
+	<div class="modal fade" id="editModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<form th:action="@{/admin/review/update}" method="POST">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Cập nhật trạng
+							thái</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<input type="hidden" name="id" id="idEdit" />
+							<div class="form-group">
+								<label class="form-label">Trạng thái</label>
+								<div class="form-check">
+									<input type="radio" class="form-check-input" th:value="false"
+										name="isActive" checked>Từ chối<label
+										class="form-check-label"></label>
+								</div>
+								<div class="form-check">
+									<input type="radio" class="form-check-input" th:value="true"
+										name="isActive">Chấp nhận <label
+										class="form-check-label"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Hủy</button>
+						<button type="submit" class="btn btn-primary">Cập nhật</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+	<script>
+	function btnEdit(id) {
+		var url = '/anime/admin/review/edit/' + id;
+		fetch(url)
+		  .then(response => response.json())
+		  .then(data => {
+		    $("#idEdit").val(data.id);
+		  })
+	}
+	</script>
+</body>
+</html>

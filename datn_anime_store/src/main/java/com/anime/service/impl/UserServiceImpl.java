@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -135,6 +137,17 @@ public class UserServiceImpl implements UserService {
 	public void setAccount(Account account) {
 		Authentication auth = new UsernamePasswordAuthenticationToken(account, null, account.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
+
+	@Override
+	public void editProfile(User user) {
+		if (ObjectUtils.isNotEmpty(user) && StringUtils.isEmpty(user.getPassword())) {
+			userRepo.updateNonPass(user.getEmail(), user.getFullname(), user.getAvatarUrl(), user.getUsername());
+		} else {
+			String hashPassword = HashPasswordConstant.ENCODER.encode(user.getPassword());
+			user.setPassword(hashPassword);
+			userRepo.update(user.getEmail(), hashPassword, user.getFullname(), user.getAvatarUrl(), user.getUsername());
+		}
 	}
 
 //	@Override

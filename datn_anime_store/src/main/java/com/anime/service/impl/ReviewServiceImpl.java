@@ -51,4 +51,14 @@ public class ReviewServiceImpl implements ReviewService {
 	public Page<Review> getByProductId(Long id, Pageable pageable) {
 		return reviewRepo.findByProductIdAndIsActive(id, ActiveConstant.ENABLE, pageable);
 	}
+
+	@Override
+	public List<Review> getReviewRefused(Boolean isActive) {
+		return reviewRepo.findReviewRefused(isActive);
+	}
+
+	@Override
+	public List<Review> getReviewAccepted(Boolean isActive) {
+		return reviewRepo.findReviewAccepted(isActive);
+	}
 }

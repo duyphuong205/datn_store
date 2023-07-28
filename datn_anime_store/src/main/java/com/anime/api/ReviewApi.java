@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.anime.constants.ActiveConstant;
 import com.anime.entity.Product;
 import com.anime.entity.Review;
 import com.anime.entity.User;
@@ -49,6 +50,7 @@ public class ReviewApi {
 			review.setComment(comment);
 			review.setUser(user);
 			review.setProduct(product);
+			review.setIsActive(ActiveConstant.DISABLE);
 			
 			reviewService.create(review);
 		} catch (Exception ex) {

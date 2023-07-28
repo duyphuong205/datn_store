@@ -23,4 +23,9 @@ public class HomeController {
 		return "user/index";
 	}
 
+	@GetMapping("/contact-us")
+	public String doShowContactUs() {
+		return "user/contact-us";
+	}
+
 }

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/admin/layout/layout-admin.html :: dynamic(~{::body})}">
+<body>
+<div class="content-body">
+    <div class="warper container-fluid">
+        <div class="new-patients main_container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Chỉnh sửa thông tin</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                <form th:action="@{/admin/edit-profile}" th:object="${userEdit}" method="POST"
+                                      enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group row widget-3">
+                                                <div class="col-lg-10">
+                                                    <div class="form-input">
+                                                        <label class="labeltest" for="file-ip-1">
+                                                            <input type="file" id="file-ip-1" accept="image/*"
+                                                                   onchange="showPreview(event);" name="fileImage">
+                                                            <div class="preview">
+                                                                <img id="file-ip-1-preview" src="" alt="img">
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-8">
+                                            <div class="row">
+                                                <div class="form-group col-xl-6">
+                                                    <label>Tên người dùng</label>
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Nhập tên người dùng" th:field="*{username}"
+                                                           readonly>
+                                                </div>
+                                                <div class="form-group col-xl-6">
+                                                    <label>Họ & tên người dùng</label>
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Nhập họ tên người dùng" th:field="*{fullname}">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-xl-6">
+                                                    <label>Mật khẩu hiện tại</label>
+                                                    <input type="password" class="form-control"
+                                                           placeholder="Nhập mật khẩu hiện tại" name="currentPassword"
+                                                           id="currentPassword" th:attr="onkeydown='unDisabledInput()'">
+                                                    <small class="text-danger"
+                                                           style="font-size: 13px; font-weight: 600"
+                                                           th:if="${currentPasswordInvalid}"
+                                                           th:text="${currentPasswordInvalid}"></small>
+                                                </div>
+                                                <div class="form-group col-xl-6">
+                                                    <label>Mật khẩu mới</label>
+                                                    <input type="password" class="form-control"
+                                                           placeholder="Nhập mật khẩu mới" name="newPassword"
+                                                           id="newPassword" disabled>
+                                                    <small class="text-danger"
+                                                           style="font-size: 13px; font-weight: 600"
+                                                           th:if="${newPasswordNull}"
+                                                           th:text="${newPasswordNull}"></small>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Địa chỉ email</label>
+                                                    <input type="email" class="form-control"
+                                                           placeholder="Nhập địa chỉ email" th:field="*{email}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-primary float-end">Lưu</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    const unDisabledInput = () => {
+        let currentPassword = document.getElementById("currentPassword");
+        let newPassword = document.getElementById("newPassword");
+        if (currentPassword.value.length > 0) {
+            newPassword.disabled = false;
+        }
+    }
+</script>
+</body>
+</html>

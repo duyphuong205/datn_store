@@ -18,7 +18,7 @@ public interface OrderRepo extends JpaRepository<Order, Long> {
 
 	Page<Order> findByIsActive(Boolean isActive, Pageable pageable);
 
-	@Query(value = "select users.username from orders join users on orders.user_id = users.id", nativeQuery = true)
+	@Query(value = "select distinct users.username from orders join users on orders.user_id = users.id", nativeQuery = true)
 	List<String> findUsernameOrdered();
 
 	@Query("SELECT o FROM Order o WHERE o.user.username = ?1 AND o.isActive = ?2")

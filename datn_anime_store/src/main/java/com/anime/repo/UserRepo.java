@@ -33,4 +33,12 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	
 	@Query("FROM User u WHERE u.username=?1 OR email=?1")
 	User findByUsernameOrEmail(String username);
+
+	@Modifying(clearAutomatically = true)
+	@Query(value = "UPDATE users SET  email = ?1, password = ?2, fullname = ?3, avatar_url = ?4 WHERE username = ?5", nativeQuery = true)
+	void update(String email, String password, String fullname, String avatarUrl, String username);
+
+	@Modifying(clearAutomatically = true)
+	@Query(value = "UPDATE users SET  email = ?1, fullname = ?2, avatar_url = ?3 WHERE username = ?4", nativeQuery = true)
+	void updateNonPass(String email, String fullname, String avatarUrl, String username);
 }

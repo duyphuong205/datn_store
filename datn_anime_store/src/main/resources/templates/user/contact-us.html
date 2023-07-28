@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/user/layout/layout-user.html :: dynamic(~{::body})}">
+<body>
+<div class="contact-main-page">
+    <div class="container">
+        <div class="col-md-12">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.44366148992!2d106.62525347518019!3d10.853821089299718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752bee0b0ef9e5%3A0x5b4da59e47aa97a8!2zQ8O0bmcgVmnDqm4gUGjhuqduIE3hu4FtIFF1YW5nIFRydW5n!5e0!3m2!1svi!2s!4v1690387370631!5m2!1svi!2s" height="450" style="border:0; width: 1140px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
+                <div class="contact-page-side-content">
+                    <h3 class="contact-page-title">Thông tin liên hệ</h3>
+                    <div class="single-contact-block">
+                        <h4><i class="fa fa-fax"></i> Địa chỉ</h4>
+                        <p>Quận 12, Công viên phần mềm Quang Trung, Tp HCM</p>
+                    </div>
+                    <div class="single-contact-block">
+                        <h4><i class="fa fa-phone"></i> Điện thoại</h4>
+                        <p>SĐT: 0392292432</p>
+                    </div>
+                    <div class="single-contact-block last-child">
+                        <h4><i class="fa fa-envelope-o"></i> Email</h4>
+                        <p>animeshop2462@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 order-2 order-lg-1">
+                <div class="contact-form-content">
+                    <h3 class="contact-page-title">Để lại thông tin của bạn</h3>
+                    <div class="contact-form">
+                        <form id="contact-form" action="http://hasthemes.com/file/mail.php" method="post">
+                            <div class="form-group">
+                                <label>Tên <span class="required">*</span></label>
+                                <input type="text" name="con_name" id="con_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email <span class="required">*</span></label>
+                                <input type="email" name="con_email" id="con_email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tiêu đề</label>
+                                <input type="text" name="con_subject" id="con_subject">
+                            </div>
+                            <div class="form-group form-group-2">
+                                <label>Tin nhắn</label>
+                                <textarea name="con_message" id="con_message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" value="submit" id="submit" class="kenne-contact-form_btn"
+                                        name="submit">Gửi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <p class="form-messege"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

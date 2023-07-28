@@ -28,7 +28,9 @@ public interface UserService extends BaseService<User> {
 
 	User getByUsernameOrEmail(String username);
 
-	public void setAccount(Account account);
+	void setAccount(Account account);
 
 //	public User createFromSocial(OAuth2User socialUser);
+
+	void editProfile(User user);
 }

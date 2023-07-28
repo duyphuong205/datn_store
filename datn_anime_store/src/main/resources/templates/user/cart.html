@@ -106,6 +106,10 @@
 		const updateQuantity = (productId)=>{
 			var inputId = '#quantity' + productId;
 			var newQuantity = $(inputId).val();
+			if (newQuantity > 10) {
+				Swal.fire("Thông báo", "Bạn chỉ có thể mua số lượng 10/1 sản phẩm!", "error");
+				return;
+			}
 			var url = '/anime/update?productId=' + productId + '&quantity=' + newQuantity + '&isReplace=true';
 			$.get(url).done(function(data){
 				$('#viewCartFragment').replaceWith(data);
