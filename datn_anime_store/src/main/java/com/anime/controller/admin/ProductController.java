@@ -68,7 +68,7 @@ public class ProductController {
 			// save images of product
 			List<ImagesProduct> images = new ArrayList<>();
 			for (MultipartFile file : imageFiles) {
-				String fileName = fileService.uploadFile(file);
+				String fileName = fileService.uploadFileCloudinary(file);
 
 				ImagesProduct imagesProduct = null;
 				if (product.getId() != null) {

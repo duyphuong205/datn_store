@@ -55,7 +55,7 @@ public class CustomerController {
 			if (imageName.getSize() == 0 || imageName == null || imageName.isEmpty()) {
 				imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png";
 			} else {
-				imageUrl = fileService.uploadFile(imageName);
+				imageUrl = fileService.uploadFileCloudinary(imageName);
 			}
 			userReq.setAvatarUrl(imageUrl);
 			userService.createCustomer(userReq);
