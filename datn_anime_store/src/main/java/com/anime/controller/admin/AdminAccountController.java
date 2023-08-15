@@ -44,7 +44,7 @@ public class AdminAccountController {
             if (fileImage.getSize() == 0 || fileImage == null || fileImage.isEmpty()) {
                 user.setAvatarUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png");
             } else {
-                user.setAvatarUrl(fileService.uploadFile(fileImage));
+                user.setAvatarUrl(fileService.uploadFileCloudinary(fileImage));
             }
             if (!"".equals(currentPassword) && currentPassword != null) {
                 if (!HashPasswordConstant.ENCODER.matches(currentPassword, userLogin.getPassword())) {
