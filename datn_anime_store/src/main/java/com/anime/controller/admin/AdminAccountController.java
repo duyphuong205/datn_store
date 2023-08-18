@@ -60,9 +60,11 @@ public class AdminAccountController {
                 }
             }
             userService.editProfile(user);
+            model.addAttribute("messageSuccess", "Chỉnh sửa thông tin thành công!");
             model.addAttribute("avatarUserUrl", user.getAvatarUrl());
         } catch (Exception ex) {
             ex.printStackTrace();
+            model.addAttribute("messageError", "Chỉnh sửa thông tin thất bại!");
         }
         return "admin/edit-profile";
     }

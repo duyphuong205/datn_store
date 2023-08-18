@@ -100,7 +100,16 @@
     document.addEventListener('DOMContentLoaded', function() {
         /*<![CDATA][*/
         let avatarUserUrl = /*[[${avatarUserUrl}]]*/'default';
+        let messageSuccess = /*[[${messageSuccess}]]*/'default';
+        let messageError = /*[[${messageError}]]*/'default';
         /*]]>*/
+        if (messageSuccess !== null) {
+            Swal.fire("Thành công", messageSuccess, "success");
+        }
+        if (messageError !== null) {
+            Swal.fire("Thất bại", messageError, "error");
+        }
+
         let preview = document.getElementById("file-ip-1-preview");
         preview.src = avatarUserUrl;
         preview.style.display = "block";

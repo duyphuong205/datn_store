@@ -49,7 +49,7 @@ public class AccountController {
 
     @GetMapping("/login/error")
     public String doLoginError(Model model) {
-        model.addAttribute("message", "Tên người dùng hoặc mật khẩu không chính xác!");
+        model.addAttribute("messageError", "Tên người dùng hoặc mật khẩu không chính xác!");
         return "user/login";
     }
 
@@ -113,10 +113,12 @@ public class AccountController {
                 }
                 userReq.setAvatarUrl(imageUrl);
                 userService.register(userReq);
-                return "redirect:/login";
+                model.addAttribute("successRegister", "Đăng ký thành công - Tên người dùng " + userReq.getUsername());
+                return "/user/register";
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+            model.addAttribute("errorRegister", "Đăng ký thất bại!");
             return "/user/register";
         }
     }
@@ -131,7 +133,7 @@ public class AccountController {
         try {
             User userResp = userService.getByEmail(email);
             if (userResp == null) {
-                redirectAttributes.addFlashAttribute("error", "Email không tồn tại!");
+                redirectAttributes.addFlashAttribute("emailInValid", "Email không tồn tại!");
             } else {
                 Random random = new Random();
                 Integer rdPassoword = random.nextInt(999999);
@@ -148,6 +150,7 @@ public class AccountController {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Cấp lại mật khẩu thất bại!");
         }
 
         return "redirect:/forgot-password";

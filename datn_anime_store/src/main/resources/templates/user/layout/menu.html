@@ -1,170 +1,186 @@
 <!-- Begin Main Header Area -->
 <header class="main-header_area">
-	<div class="transparent-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="transparent-header_nav position-relative">
-						<div class="header-logo_area">
-							<a href="index.html"> <img
-								src="https://www.favicon.cc/logo3d/862154.png" alt="Header Logo"
-								height="50px" width="50px">
-							</a>
-						</div>
-						<div class="main-menu_area d-none d-lg-block">
-							<nav class="main-nav d-flex justify-content-center">
-								<ul>
-									<li class="dropdown-holder"><a th:href="@{/index}"
-										class="text-white" style="font-weight: bold">Trang chủ </a></li>
-									<li class="megamenu-holder position-static"><a
-										th:href="@{/shop}" class="text-white"
-										style="font-weight: bold">Mua sắm <i
-											class="ion-chevron-down"></i></a>
-										<ul class="kenne-megamenu">
-											<li th:each="itemParent: ${@DataGlobal.categoryParents}"><span
-												class="megamenu-title" th:text="${itemParent.name}"></span>
-												<ul>
-													<li th:each="item: ${itemParent.categories}"><a
-														th:href="@{|/shop/category/${item.name}|}"
-														th:text="${item.name}"></a></li>
-												</ul></li>
-										</ul></li>
-									<li><a th:href="@{/shop-discount}" class="text-white"
-										style="font-weight: bold">Giảm giá</a></li>
-									<li><a th:href="@{/contact-us}" class="text-white"
-										style="font-weight: bold">Liên hệ</a></li>
-									<li><a href="javascript:void(0)" class="text-white"
-										style="font-weight: bold">Tài khoản <i
-											class="ion-chevron-down"></i></a>
-										<ul class="kenne-dropdown">
-											<li><a th:unless="${#request.remoteUser}"
-												th:href="@{/login}">Đăng nhập</a></li>
-											<li><a th:unless="${#request.remoteUser}"
-												th:href="@{/register}">Đăng ký</a></li>
-											<li><a th:unless="${#request.remoteUser}"
-												th:href="@{/forgot-password}">Quên mật khẩu</a></li>
-											<li><a th:if="${#request.remoteUser}"
-												th:href="@{/my-order}">Lịch sử mua hàng</a></li>
-											<li><a th:if="${#request.remoteUser}"
-												th:href="@{/logout}">Đăng xuất</a></li>
-										</ul></li>
-								</ul>
-							</nav>
-						</div>
-						<div class="header-right_area header-right_area-2">
-							<ul>
-								<li class="minicart-wrap"><a href="#miniCart"
-									class="minicart-btn toolbar-btn">
-										<div class="minicart-count_area">
+    <div class="transparent-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="transparent-header_nav position-relative">
+                        <div class="header-logo_area">
+                            <a href="index.html"> <img
+                                    src="https://www.favicon.cc/logo3d/862154.png" alt="Header Logo"
+                                    height="50px" width="50px">
+                            </a>
+                        </div>
+                        <div class="main-menu_area d-none d-lg-block">
+                            <nav class="main-nav d-flex justify-content-center">
+                                <ul>
+                                    <li class="dropdown-holder"><a th:href="@{/index}"
+                                                                   class="text-white" style="font-weight: bold">Trang
+                                        chủ </a></li>
+                                    <li class="megamenu-holder position-static"><a
+                                            th:href="@{/shop}" class="text-white"
+                                            style="font-weight: bold">Mua sắm <i
+                                            class="ion-chevron-down"></i></a>
+                                        <ul class="kenne-megamenu">
+                                            <li th:each="itemParent: ${@DataGlobal.categoryParents}"><span
+                                                    class="megamenu-title" th:text="${itemParent.name}"></span>
+                                                <ul>
+                                                    <li th:each="item: ${itemParent.categories}"><a
+                                                            th:href="@{|/shop/category/${item.name}|}"
+                                                            th:text="${item.name}"></a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a th:href="@{/shop-discount}" class="text-white"
+                                           style="font-weight: bold">Giảm giá</a></li>
+                                    <li><a th:href="@{/contact-us}" class="text-white"
+                                           style="font-weight: bold">Liên hệ</a></li>
+                                    <li><a th:unless="${@AuthGlobal.getInforUser()}" href="javascript:void(0)"
+                                           class="text-white"
+                                           style="font-weight: bold">Tài khoản <i
+                                            class="ion-chevron-down"></i></a>
+                                        <a th:if="${@AuthGlobal.getInforUser()}" href="javascript:void(0)"
+                                           class="text-white"
+                                           style="font-weight: bold">[[${@AuthGlobal.getInforUser().getFullname()}]] <i
+                                                class="ion-chevron-down"></i></a>
+                                        <ul class="kenne-dropdown">
+                                            <li><a th:unless="${#request.remoteUser}"
+                                                   th:href="@{/login}">Đăng nhập</a></li>
+                                            <li><a th:unless="${#request.remoteUser}"
+                                                   th:href="@{/register}">Đăng ký</a></li>
+                                            <li><a th:unless="${#request.remoteUser}"
+                                                   th:href="@{/forgot-password}">Quên mật khẩu</a></li>
+                                            <li><a th:if="${#request.remoteUser}"
+                                                   th:href="@{/my-order}">Lịch sử mua hàng</a></li>
+                                            <li><a th:if="${#request.remoteUser}"
+                                                   th:href="@{/logout}">Đăng xuất</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="header-right_area header-right_area-2">
+                            <ul>
+                                <li class="minicart-wrap"><a href="#miniCart"
+                                                             class="minicart-btn toolbar-btn">
+                                    <div class="minicart-count_area">
 											<span class="item-count" id="headerTotalQuantity1"
-												th:text="${session.currentCart.totalQuantity}"></span> <i
-												class="ion-bag"></i>
-										</div>
-								</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="header-sticky">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="sticky-header_nav position-relative">
-						<div class="row align-items-center justify-content-between">
-							<div class="col-lg-2 col-sm-6">
-								<div class="header-logo_area">
-									<a href="index.html"> <img
-										src="https://www.favicon.cc/logo3d/862154.png"
-										alt="Header Logo" height="50px" width="50px">
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-7 d-none d-lg-block position-static">
-								<div class="main-menu_area">
-									<nav class="main-nav d-flex justify-content-center">
-										<ul>
-											<li class="dropdown-holder"><a th:href="@{/index}">Trang
-													chủ </a></li>
-											<li class="megamenu-holder position-static"><a
-												th:href="@{/shop}">Mua sắm <i class="ion-chevron-down"></i></a>
-												<ul class="kenne-megamenu">
-													<li th:each="itemParent: ${@DataGlobal.categoryParents}"><span
-														class="megamenu-title" th:text="${itemParent.name}"></span>
-														<ul>
-															<li th:each="item: ${itemParent.categories}"><a
-																th:href="@{|/shop/category/${item.name}|}"
-																th:text="${item.name}"></a></li>
-														</ul></li>
-												</ul></li>
-											<li><a th:href="@{/shop-discount}">Giảm giá</a></li>
-											<li><a th:href="@{/contact-us}">Liên hệ</a></li>
-											<li><a href="javascript:void(0)">Tài khoản <i
-													class="ion-chevron-down"></i></a>
-												<ul class="kenne-dropdown">
-													<li><a th:unless="${#request.remoteUser}"
-														th:href="@{/login}">Đăng nhập</a></li>
-													<li><a th:unless="${#request.remoteUser}"
-														th:href="@{/register}">Đăng ký</a></li>
-													<li><a th:unless="${#request.remoteUser}"
-														th:href="@{/forgot-password}">Quên mật khẩu</a></li>
-													<li><a th:if="${#request.remoteUser}"
-														th:href="@{/my-order}">Lịch sử mua hàng</a></li>
-													<li><a th:if="${#request.remoteUser}"
-														th:href="@{/logout}">Đăng xuất</a></li>
-												</ul></li>
-										</ul>
-									</nav>
-								</div>
-							</div>
-							<div class="col-lg-3 col-sm-6">
-								<div class="header-right_area header-right_area-2">
-									<ul>
-										<li class="minicart-wrap"><a href="#miniCart"
-											class="minicart-btn toolbar-btn">
-												<div class="minicart-count_area">
+                                                  th:text="${session.currentCart.totalQuantity}"></span> <i
+                                            class="ion-bag"></i>
+                                    </div>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sticky-header_nav position-relative">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-lg-2 col-sm-6">
+                                <div class="header-logo_area">
+                                    <a href="index.html"> <img
+                                            src="https://www.favicon.cc/logo3d/862154.png"
+                                            alt="Header Logo" height="50px" width="50px">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 d-none d-lg-block position-static">
+                                <div class="main-menu_area">
+                                    <nav class="main-nav d-flex justify-content-center">
+                                        <ul>
+                                            <li class="dropdown-holder"><a th:href="@{/index}">Trang
+                                                chủ </a></li>
+                                            <li class="megamenu-holder position-static"><a
+                                                    th:href="@{/shop}">Mua sắm <i class="ion-chevron-down"></i></a>
+                                                <ul class="kenne-megamenu">
+                                                    <li th:each="itemParent: ${@DataGlobal.categoryParents}"><span
+                                                            class="megamenu-title" th:text="${itemParent.name}"></span>
+                                                        <ul>
+                                                            <li th:each="item: ${itemParent.categories}"><a
+                                                                    th:href="@{|/shop/category/${item.name}|}"
+                                                                    th:text="${item.name}"></a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><a th:href="@{/shop-discount}">Giảm giá</a></li>
+                                            <li><a th:href="@{/contact-us}">Liên hệ</a></li>
+                                            <li><a th:unless="${@AuthGlobal.getInforUser()}" href="javascript:void(0)">Tài
+                                                khoản <i
+                                                        class="ion-chevron-down"></i></a>
+                                                <a th:if="${@AuthGlobal.getInforUser()}" href="javascript:void(0)">[[${@AuthGlobal.getInforUser().getFullname()}]]
+                                                    <i
+                                                            class="ion-chevron-down"></i></a>
+                                                <ul class="kenne-dropdown">
+                                                    <li><a th:unless="${#request.remoteUser}"
+                                                           th:href="@{/login}">Đăng nhập</a></li>
+                                                    <li><a th:unless="${#request.remoteUser}"
+                                                           th:href="@{/register}">Đăng ký</a></li>
+                                                    <li><a th:unless="${#request.remoteUser}"
+                                                           th:href="@{/forgot-password}">Quên mật khẩu</a></li>
+                                                    <li><a th:if="${#request.remoteUser}"
+                                                           th:href="@{/my-order}">Lịch sử mua hàng</a></li>
+                                                    <li><a th:if="${#request.remoteUser}"
+                                                           th:href="@{/logout}">Đăng xuất</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="header-right_area header-right_area-2">
+                                    <ul>
+                                        <li class="minicart-wrap"><a href="#miniCart"
+                                                                     class="minicart-btn toolbar-btn">
+                                            <div class="minicart-count_area">
 													<span class="item-count" id="headerTotalQuantity2"
-														th:text="${session.currentCart.totalQuantity}"></span> <i
-														class="ion-bag"></i>
-												</div>
-										</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="offcanvas-minicart_wrapper" id="miniCart">
-		<div class="offcanvas-menu-inner">
-			<a href="#" class="btn-close"><i class="ion-android-close"></i></a>
-			<div class="minicart-content">
-				<div class="minicart-heading">
+                                                          th:text="${session.currentCart.totalQuantity}"></span> <i
+                                                    class="ion-bag"></i>
+                                            </div>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-minicart_wrapper" id="miniCart">
+        <div class="offcanvas-menu-inner">
+            <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
+            <div class="minicart-content">
+                <div class="minicart-heading">
 
-					<h4>Giá hàng</h4>
+                    <h4>Giá hàng</h4>
 
-				</div>
-			</div>
-			<div class="minicart-item_total">
+                </div>
+            </div>
+            <div class="minicart-item_total">
 
-				<span>Tổng giá:</span> <span class="ammount" id="headerTotalPrice"
-					th:text="${#numbers.formatDecimal(session.currentCart.totalPrice, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></span>
-			</div>
-			<div class="minicart-btn_area">
-				<a th:href="@{/cart-view}" class="kenne-btn kenne-btn_fullwidth">Giỏ
-					Hàng</a>
-			</div>
-			<div class="minicart-btn_area">
-				<a th:href="@{/checkout}" class="kenne-btn kenne-btn_fullwidth">Thanh
-					Toán</a>
-			</div>
+                <span>Tổng giá:</span> <span class="ammount" id="headerTotalPrice"
+                                             th:text="${#numbers.formatDecimal(session.currentCart.totalPrice, 1, 'POINT', 3, 'POINT') + ' VNĐ'}"></span>
+            </div>
+            <div class="minicart-btn_area">
+                <a th:href="@{/cart-view}" class="kenne-btn kenne-btn_fullwidth">Giỏ
+                    Hàng</a>
+            </div>
+            <div class="minicart-btn_area">
+                <a th:href="@{/checkout}" class="kenne-btn kenne-btn_fullwidth">Thanh
+                    Toán</a>
+            </div>
 
-		</div>
-	</div>
-	<div class="global-overlay"></div>
+        </div>
+    </div>
+    <div class="global-overlay"></div>
 </header>
 <!-- Main Header Area End Here -->

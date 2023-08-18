@@ -79,11 +79,27 @@
 	</div>
 	<!-- Kenne's Login Register Area  End Here -->
 
-	<script>
+	<script th:inline="javascript">
 		var loadFile = function(event) {
 			var image = document.getElementById("display_image");
 			image.src = URL.createObjectURL(event.target.files[0]);
 		};
+
+		document.addEventListener('DOMContentLoaded', function() {
+			/*<![CDATA][*/
+			let messageSuccess = /*[[${successRegister}]]*/'default';
+			let messageError = /*[[${errorRegister}]]*/'default';
+			/*]]>*/
+			if (messageSuccess !== null) {
+				Swal.fire("Thành công", messageSuccess, "success");
+				setTimeout(function() {
+					window.location.href = '/anime/login';
+				}, 3000);
+			}
+			if (messageError !== null) {
+				Swal.fire("Thất bại", messageError, "error");
+			}
+		})
 	</script>
 </body>
 </html>
