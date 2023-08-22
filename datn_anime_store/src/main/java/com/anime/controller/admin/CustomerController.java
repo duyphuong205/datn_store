@@ -111,6 +111,7 @@ public class CustomerController {
 			users = pageUsers.getContent();
 			model.addAttribute("totalPages", pageUsers.getTotalPages());
 			model.addAttribute("currentPage", pageNumber);
+			model.addAttribute("keyword", keyword);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

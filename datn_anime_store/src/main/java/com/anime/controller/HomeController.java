@@ -18,7 +18,7 @@ public class HomeController {
 	public String doShowIndex(Model model) {
 		model.addAttribute("topNewsProd", productService.getTop10NewsProd());
 		model.addAttribute("topViewsProd", productService.getTop12ViewsProd());
-		model.addAttribute("topSelledsProd", productService.getTop12ViewsProd());
+		model.addAttribute("topSelledsProd", productService.getTop12SelledsProd());
 		model.addAttribute("topDiscountsProd", productService.getTop12DiscountsProd());
 		return "user/index";
 	}

@@ -23,6 +23,7 @@
 												<label for="sel1">Chọn người dùng:</label> <select
 													name="username" onchange="this.form.submit()"
 													class="form-control" id="sel1">
+													<option value="">Tất cả</option>
 													<option th:each="item: ${usernames}" th:text="${item}"
 														th:value="${item}"
 														th:selected="${item} == ${currentUsername}"></option>

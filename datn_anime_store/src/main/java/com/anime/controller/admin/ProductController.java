@@ -124,6 +124,7 @@ public class ProductController {
 			products = pageProducts.getContent();
 			model.addAttribute("totalPages", pageProducts.getTotalPages());
 			model.addAttribute("currentPage", pageNumber);
+			model.addAttribute("keyword", keyword);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

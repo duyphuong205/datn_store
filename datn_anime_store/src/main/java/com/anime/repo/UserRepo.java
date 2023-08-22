@@ -22,9 +22,9 @@ public interface UserRepo extends JpaRepository<User, Long> {
 	@Query(value = "SELECT u FROM User u JOIN UserRole ur ON u.id = ur.user.id JOIN Role r ON ur.role.id = r.id "
 			+ "WHERE u.isActive = ?1 AND r.name in ('CUSTOMER')")
 	Page<User> findAllCustomer(Boolean isActive, Pageable pageable);
-	
-	@Query(value = "SELECT * FROM users u JOIN user_roles ur ON u.id = ur.user_id JOIN roles r ON ur.role_id = r.id "
-			+ "WHERE u.is_active = ?1 AND CONCAT(u.username, u.fullname, u.email) LIKE %?2% AND r.name in ('CUSTOMER')", nativeQuery = true)
+
+	@Query(value = "SELECT u FROM User u JOIN UserRole ur ON u.id = ur.user.id JOIN Role r ON ur.role.id = r.id "
+			+ "WHERE u.isActive = ?1 AND r.name in ('CUSTOMER') AND CONCAT(u.fullname, u.username, u.email) LIKE %?2%")
 	Page<User> findAllSearchCustomer(Boolean isActive, String keyword, Pageable pageable);
 	
 	@Modifying(clearAutomatically = true)
